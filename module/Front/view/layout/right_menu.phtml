@@ -1,0 +1,41 @@
+<?php 
+
+	if($blockRightMenu){
+
+		foreach ($blockRightMenu as $key => $value1) {
+			echo "<div class='cssmenu'>";
+			echo "<li class='block_menu has-sub open block_sub'   style='background: url(/public/img/front/menu_img/block".$value1['porydok'].".gif) no-repeat'><a href='#'><span>".$value1['block']."</span></a><img class='pulse' src='/public/img/front/background/logo.png'><div style='margin:10px'>3 декабря в 358 ауд. УГХТУ состоится открытая лекция: 
+OPEN SOURCE В ЗЕЛЁНЫХ ТЕХНОЛОГИЯХ - НОВЫЕ ВОЗМОЖНОСТИ</div><ul>";
+				if($punctMenu0){
+					foreach ($punctMenu0 as $key => $value) {
+						if($value['mu_block'] == $value1['id']){							
+							if($value['url'] === "#" ){
+								echo "<li class='punct_menu_lvl_0 has-sub punct_sub' data='".$value['id']."'><a href='".$value['url']."'>".$value['punct']."</a>";
+								/*	if($punctMenu1){
+									foreach ($punctMenu1 as $key => $value2) {
+										if($value['id'] == $value2['parents_punct']){
+								echo "<ul> <li><a href='".$value['url']."'><span>".$value2['punct']."</span></a></li>";
+							
+
+							}
+								
+							}
+							echo "</ul></li>";
+						} */
+							}else{
+							$url_value = "";
+								if ($value['call_url_value'])
+									$url_value = "/".$value['call_url_value'];		
+
+							echo "<li class='punct_menu_lvl_0'><a href='/".$value1['url_title']."/".$value['url_title'].$url_value."'>".$value['punct']."</a></li>";
+						}
+						}
+
+					}			
+				}
+
+			echo "</ul></li></div>";
+		}
+
+}
+		?>

@@ -1,0 +1,277 @@
+<?php  
+use Front\Model\GetContent;
+
+$GetContent = new GetContent();	
+			//$data_select = array('admin','admin');	
+			
+			$blockMenu = $GetContent->getBlockMenu($language);
+			$punctMenu = $GetContent->getPunctMenu($language);
+			//$getSubPunctMenu = $getLeftMenu->getSubPunctMenu();
+			//var_dump($method);
+						
+			foreach ($blockMenu as $key => $value1){	
+					$blockMenu[$key] = $value1;
+			}
+
+			foreach ($punctMenu as $key => $value){						
+				$punctMenu[$key] = $value;
+				}
+
+			/*foreach ($getSubPunctMenu as $key => $value){
+							foreach ($value as $key => $value)
+				$getSubPunctMenu[$key] = $value;
+				}
+				*/
+				
+				for ($i=0; $i < count($blockMenu) ; $i++) { 
+					switch ($blockMenu[$i]['position']) {
+						case 'left':
+							//asort($fruits, SORT_NUMERIC)
+							//echo $blockMenu[$i]['porydok'] ;
+							$blockLeftMenu[$i] = $blockMenu[$i];
+							break;
+						case 'right':
+							//echo 'right';
+							//echo $blockMenu[$i]['porydok'] ;
+							$blockRightMenu[$i] = $blockMenu[$i];
+							break;
+						case 'center':
+							//echo 'center';
+							//echo $blockMenu[$i]['porydok'] ;
+							$blockCenterMenu[$i] = $blockMenu[$i];
+							break;						
+						default:
+							# code...
+							break;
+					}					
+				}
+
+
+
+				for ($i=0; $i < count($punctMenu) ; $i++) { 
+					switch ($punctMenu[$i]['level_deep']) {
+						case '0':
+							//asort($fruits, SORT_NUMERIC)
+							//echo $blockMenu[$i]['porydok'] ;
+							$punctMenu0[$i] = $punctMenu[$i];
+							break;
+						case '1':
+							//echo 'right';
+							//echo $blockMenu[$i]['porydok'] ;
+							$punctMenu1[$i] = $punctMenu[$i];
+							break;
+						case '2':
+							//echo 'center';
+							//echo $blockMenu[$i]['porydok'] ;
+							$punctMenu2[$i] = $punctMenu[$i];
+							break;						
+						default:
+							# code...
+							break;
+					}					
+				}
+
+		
+
+
+					function cmp($a, $b)
+					{
+					   return strcmp($a["porydok"], $b["porydok"]);
+					}
+					usort($blockLeftMenu, "cmp");
+				//var_dump($punctMenu0);
+
+				
+							//var_dump($punctMenu1);
+
+//SELECT * FROM `mu_block_punct` WHERE id  IN (SELECT `parents_punct` FROM `mu_block_punct`)
+
+
+
+?>
+ 			
+
+<?php 
+
+	if($blockLeftMenu){
+		//var_dump($blockLeftMenu);
+		foreach ($blockLeftMenu as $key => $value1) {
+			echo "<div class='cssmenu l_menu'>";
+			echo "<li class='block_menu  has-sub block_sub '  style='background: url(/public/img/front/menu_img/block".$value1['porydok'].".gif) no-repeat'><a href='#'><span>".$value1['block']."</span></a><ul>";
+				if($punctMenu0){
+					foreach ($punctMenu0 as $key => $value) {
+						if($value['mu_block'] == $value1['id']){							
+							if($value['url'] === "#" ){
+								echo "<li class='punct_menu_lvl_0 has-sub punct_sub' data='".$value['id']."'><a href='".$value['url']."'>".$value['punct']."</a>";
+								/*	if($punctMenu1){
+									foreach ($punctMenu1 as $key => $value2) {
+										if($value['id'] == $value2['parents_punct']){
+								echo "<ul> <li><a href='".$value['url']."'><span>".$value2['punct']."</span></a></li>";
+							
+
+							}
+								
+							}
+							echo "</ul></li>";
+						} */
+							}else{
+								$url_value = "";
+								if ($value['call_url_value'])
+									$url_value = "/".$value['call_url_value'];		
+
+							echo "<li class='punct_menu_lvl_0'><a href='/".$value1['url_title']."/".$value['url_title'].$url_value."'>".$value['punct']."</a></li>";
+						}
+						}
+
+					}			
+				}
+
+			echo "</ul></li></div>";
+		}
+
+}
+		?>
+
+
+
+
+<?php
+
+/*
+
+
+<div class='cssmenu'>
+
+	 <li class='active has-sub open'><a href='#'><span>Home111</span></a>
+<ul>
+
+   <li class='active'><a href='#'><span>Home</span></a></li>
+   <li><a href='#'><span>Products</span></a></li>
+   <li><a href='#'><span>Company</span></a></li>
+   <li class='last'><a href='#'><span>Contact</span></a></li>
+
+            <li class='active has-sub'><a href='#'><span>Product 1</span></a>
+            <ul>
+               <li><a href='#'><span>Sub Product</span></a></li>
+               <li class='last'><a href='#'><span>Sub Product</span></a></li>
+            </ul>
+         </li>
+</ul>
+</li>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+			
+<ul>
+	<li><a  style="font-weight:bold;" data="О компании" href="#">О компании</a>
+		<ul>
+			 <li><a href="/about/end/braz">О нашей</a></li>			
+			 <li><a href="#">О вашей </a></li>
+			 <li><a href="/about/com/1">О ихней</a></li>
+		</ul>
+	</li>
+	<li><a style="font-weight:bold;" data="Продукция" href="#">Продукция</a>
+		<ul>
+			 <li><a href="/products/end/braz">подготовки поверхности</a></li>
+			 <li><a href="/products/prod/1">Цинкование и кадмирование</a></li><li><a href="/products/kote/1">Кошки</a></li>		
+		</ul>
+	</li>	
+	<li><a style="font-weight:bold;" data="Контакты" href="/contacts">Контакты</a></li>
+	<br>
+	<hr>
+	<br>
+	<li><a style="font-weight:normal;" data="В мире гальванотехники" href="#">В мире гальванотехники</a>
+		<ul>
+			 <li><a href="#">Мир в европе</a></li>
+			 <li><a href="#">Мир в США</a></li>			
+		</ul>
+	</li>	
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+$getLeftMenu = new GetContent();	
+			//$data_select = array('admin','admin');	
+			$query = "subs.subsection,leftM.url_name ,leftM.url,subs.url as subUrl,leftM.gx_status as lmStat
+			 FROM gx_left_menu as leftM RIGHT JOIN gx_subsection as Subs ON
+			  leftM.gx_subsection = Subs.id 
+			  WHERE subs.gx_section = 3 AND subs.gx_status = 1  ORDER BY subs.subsection ";
+			$leftMenu = $getLeftMenu->goSelect($query);
+			//var_dump($leftMenu);
+			echo "<ul>";			
+			foreach ($leftMenu as $key => $value){
+
+
+
+				}
+
+				
+			echo "</ul>";
+			
+
+<ul>
+	<li><a href="#">Ìåòàëë</a>
+		<ul>
+			 <li class="active"><a href="#">Àðìàòóðà</a></li>
+			 <li><a href="http://bayguzin.ru/">Òðóáà ïðîôèëüíàÿ</a></li>
+			 <li><a href="#">Ïðîâîëîêà âÿçàëüíàÿ</a></li>
+			 <li><a href="#">Óãîëîê</a>
+				<ul>
+					<li><a href="#">Óãîëîê òàêîé</a></li>
+					<li><a href="#">Óãîëîê äðóãîé</a></li>
+					<li><a href="#">Óãîëîê òðåòèé</a></li>
+					<li><a href="#">Óãîëîê êðàñèâûé</a></li>
+				</ul>
+			</li>
+			 <li><a href="#">Ýëåêòðîäû</a></li>
+		</ul>
+	</li>
+	<li><a href="#">Ìåòàëë è àðìàòóðà</a>
+		<ul>
+			 <li><a href="#">Àðìàòóðà</a></li>
+			 <li><a href="#">Òðóáà ïðîôèëüíàÿ</a></li>
+			 <li><a href="#">Ïðîâîëîêà âÿçàëüíàÿ</a></li>
+			 <li><a href="#">Óãîëîê</a></li>
+			 <li><a href="#">Ýëåêòðîäû</a></li>
+		</ul>
+	</li>
+	<li><a href="#">Ìåòàëëè÷åñêèå</a>
+		<ul>
+			 <li><a href="#">Ñåòêà êëàäî÷íàÿ</a></li>
+			 <li><a href="#">Ñåòêà  ðàáèöà</a></li>
+			 <li><a href="#">Ñåòêà øòóêàòóðíàÿ</a>
+				<ul>
+					<li><a href="#">Ñåòêà øòóêàòóðíàÿ 1</a></li>
+					<li><a href="#">Ñåòêà øòóêàòóðíàÿ 2</a></li>
+					<li><a href="#">Ñåòêà øòóêàòóðíàÿ 3</a></li>
+				</ul>
+			</li>
+		</ul>
+	</li>
+</ul>
+*/
+?>
+
+
+

@@ -1,0 +1,75 @@
+<?php  
+use Mychem\Model\SqlContent;
+
+$SqlContent = new SqlContent();	
+
+			
+//$content1 = $SqlContent->getCheckPage($_SESSION['lang']);
+
+
+
+
+if ($_SESSION['check_page']) {
+
+
+
+echo '<div type="check_page" class="ui-widget ui-helper-clearfix"><ul id="gallery" class="gallery ui-helper-reset ui-helper-clearfix">';
+
+foreach ($_SESSION['check_page'] as $key => $value):
+	switch ($value['mu_status_check']) {
+    case '3':
+         
+          $arr_status = array(
+                              'status_page' => 'Ожидает проверки',
+                              'icon' => 'ui-icon ui-icon-clock',
+                              'text' => 'Данный статус ознаечает, что ВАША старница находится в стадии ожидания проверки, следите за изменением статуса и информации о страницы в нем!!',
+                             );
+
+      break;
+
+    case '7':
+         
+          $arr_status = array(
+                              'status_page' => 'Треба доробити',
+                              'icon' => 'ui-icon ui-icon-alert',
+                              'text' => $value['notification'],
+                             );
+
+      break;  
+    case '5':
+         
+          $arr_status = array(
+                              'status_page' => 'Відхилено',
+                              'icon' => 'ui-icon  ui-icon-circle-close',
+                              'text' => $value['notification'],
+                             );
+
+      break;      
+    
+    default:
+      $arr_status = array();
+      break;
+  }
+?>
+
+ <li type='check_page' class="ui-widget-content ui-corner-tr">
+    <h6 class="ui-widget-header"><?=$value['title']?></h6>
+    
+   	<div><?=$value['preview']?></div>
+    <a  title="Подробнее" class="ui-icon ui-icon-zoomin">Подробнее</a>
+    <a  title="Редактироват" class="ui-icon ui-icon-pencil">Редактироват</a>
+     <p ><?=$value['data_update']?></p>
+     <a data="info" title="<?=$arr_status['status_page']?>" class="<?=$arr_status['icon']?>"><?=$arr_status['text']?></a>
+
+    <textarea content="update" data_id="<?=$value['id']?>" style="display:none"><?=$value['content']?></textarea> 
+    <textarea  content="or" data_or_id="<?=$value['or_id']?>"  style="display:none"><?=$value['or_content']?></textarea>      
+  </li>
+
+
+<?php
+ENDFOREACH;
+echo "</ul></div>";
+}
+
+
+?>

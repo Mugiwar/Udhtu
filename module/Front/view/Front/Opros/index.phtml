@@ -1,0 +1,93 @@
+<?php 
+
+
+
+if(!empty($content['text'])){
+
+	
+/*
+	?>	
+<div class="head-fak">		
+	<img src="<?=$otdel_staff[0]['about'] ?>">
+	<h2><?=$content['name_fak'];?></h2>
+	<div class="contact-fak">
+	<?php 
+		foreach ($contact as $key => $value) {
+			echo "<p>".$value['label'].': '.$value['data']."</p>";
+		}
+	?>
+			
+		<div class="soc-con-fak" style="display:none">
+			<a href="http://vk.com/club69358513">
+				<img src="http://udhtu.com.ua/userfiles/image/vkontaktu.png" alt="">
+			</a>
+			<a href="https://www.facebook.com/TS.UDHTU">
+				<img src="http://udhtu.com.ua/userfiles/image/facebook.png"  alt="">
+			</a>
+			<div class="news-fak">Новости</div>
+		</div>
+	</div>
+	
+</div>
+	
+		    <?php 
+		    if($otdel_staff){
+		    	echo '<div id="fakultet" class="accordion">  <ol>';
+		    	$slide =1;
+		    	$vp = 1;
+
+		    	foreach ($otdel_staff as $key => $value) {
+		    		if($vp != $value['porydok_slide']){
+		    			echo "</figcaption>	</figure> </div> </li>";
+		    			$vp +1;
+		    		}
+
+
+		    		if($value['porydok_slide'] == $slide){
+		    			echo "<li>";
+		    			echo "<h2><span>".$value['short_data']."</span></h2>";
+		    			echo "<div>";
+		    			echo "<figure>";
+		    			echo '<img src="'.$value["img"].'" alt="image" />';
+		    			echo "<figcaption>";		    		
+		    			$slide+=1;
+		    			$vp = $value['porydok_slide'];
+		    			echo "<p>".$value['data']." ".mb_strtolower($otdel_staff['short_name'], 'UTF-8').'</p> <p>'.$value['last_name'].' '.$value['name'].' '.$value['middle_name']."</p>";
+		    			continue;
+		    		}
+		    		if($value['porydok_view'] == 2)
+		    			echo $value['data'];
+		    		else	
+		    			echo ", ".mb_strtolower($value['data'], 'UTF-8');
+
+
+
+
+
+		    	}
+
+
+
+		    	echo '</ol>	</div>';
+}
+		    */ ?>
+
+			
+
+
+
+<div id="page_text"> 
+<?=$content['text'];?>
+<?=$content['opros_all'];?>
+
+
+ </div>
+ <?php
+ 
+	}
+
+
+?>
+
+
+

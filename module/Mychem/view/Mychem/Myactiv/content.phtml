@@ -1,0 +1,114 @@
+<?php 
+if ($pageAction):
+
+	if ($pageAction === "edit_") {		
+		 foreach ($arrContent as $key => $value)		 
+		 		$subsection_value = $value['gx_subsection'];
+		 		$content = $value['content'];
+		 		$call_url_key = $value['call_url_key'];
+		 		$call_url_value = $value['call_url_value'];
+		 		$status_value = $value['gx_status'];
+		 		$language_value = $value['gx_language'];
+		 		$combine_name = $value['combine_name'];
+		 		$title = $value['title'];
+		 		$abstract = $value['abstract'];
+		 		//$abstract = $value['abstract'];
+		 		//$abstract = $value['abstract'];
+		 		$select = "selected";
+
+		 	
+		 			
+
+		 	
+		}
+	?>
+
+
+<div class="add_section">
+	<form id="form1" name="<?=$pageAction?>form_content" method="post" action="">
+		<div id="mu_degree">
+			<label >Выбирите  подраздел к которому относится</label>
+			<select class="form_field_select"  name="<?=$pageAction?>subsection">		
+				<option selected disabled data="option_degree_0" value=0 >Подрозделы</option>
+						<?php foreach($subSection as $key => $value):
+							  if ($value['id'] == $subsection_value) {
+							echo '<option  selected data="" value="'.$value['id'].'">'.$value['subsection'].'</option>';	}else{	
+								echo '<option data="" value="'.$value['id'].'">'.$value['subsection'].'</option>';
+							}
+
+					ENDFOREACH?>
+			</select></div>			
+		<div id="mu_degree">
+			<label >Выбирите  язык вводимого контента</label>
+			<select class="form_field_select"  name="<?=$pageAction?>language">		
+				<option selected disabled data="option_degree_0" value=0 >Языки</option>
+						<?php foreach($language as $key => $value):
+							  if ($value['id'] == $language_value) {
+							echo '<option  selected data="" value="'.$value['id'].'">'.$value['language'].'</option>';	}else{	
+								echo '<option data="" value="'.$value['id'].'">'.$value['language'].'</option>';
+							}
+
+					ENDFOREACH?>
+			</select></div>				
+		<p>Фраза на латинском(одинаковая для все страниц с разными переводами)</p>
+		<p><input type="text" name="<?=$pageAction?>pk_language" value="<?=$combine_name?>"></p>
+		<p>Заголовок</p>
+		<p><input type="text" name="<?=$pageAction?>title" value="<?=$title?>"></p>
+		<p>Краткое описание</p>
+		<p><input type="text" name="<?=$pageAction?>abstract" value="<?=$abstract?>"></p>
+		<p>Ссылка на эту страничку key</p>
+		<p><input type="text" name="<?=$pageAction?>call_key" value="<?=$call_url_key?>"></p>
+		<p>Ссылка на эту страничку value</p>
+		<p><input type="text" name="<?=$pageAction?>call_value" value="<?=$call_url_value?>"></p>
+		<div id="mu_degree">
+			<label >Статус</label>
+			<select class="form_field_select"  name="<?=$pageAction?>status">		
+				<option selected disabled data="option_degree_0" value=0 >Статус</option>
+					<?php foreach($status as $key => $value):						
+						if ($key == $status_value) {
+							echo '<option selected value="'.$key.'">'.$value.'</option>';
+						}else{
+							echo '<option  value="'.$key.'">'.$value.'</option>';			}
+					ENDFOREACH;?>
+			</select></div>	
+		<p><textarea name="<?=$pageAction?>text" cols="45" rows="5">
+		<?php 
+			if ($pageAction === "edit_")
+				echo $content;
+		?>
+	</textarea></p>
+		<script type="text/javascript">
+		    CKEDITOR.replace('<?=$pageAction?>text');
+		</script>
+		<p><input type="hidden" name="pageAction" value="<?=$pageAction?>"></p>
+		<input type="submit" value=" Сохранить ">
+	</form>
+</div>
+
+
+
+	<?php 
+
+	ENDIF;?>
+
+
+
+
+<?php if (!$pageAction):
+
+?>
+<div class="page_section">
+	<center><p><h2>Тут создаются content<h2></p></center>
+
+<div class="content_sm">
+<?php foreach ($conSub as $key => $value):?>	
+		<contentSub data="<?=$value['id']?>"><?=$value['subsection']?>	</contentSub>
+			
+<?php 
+ENDFOREACH;?>
+
+</div>
+		<p><a href="content/new/insert">New</a></p>
+</div>
+<?php
+ENDIF;?>

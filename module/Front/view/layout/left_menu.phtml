@@ -1,0 +1,74 @@
+<?php  
+use Front\Model\GetContent;
+$GetContent = new GetContent();
+
+
+    //формирование масивов  позхиционніх меню
+    $blockMenu = $GetContent->getBlockMenu($_SESSION['lang']);
+    //if(!isset($_SESSION['active_block']))
+     // $_SESSION['active_block'] = '';
+
+
+    for ($i=0; $i < count($blockMenu) ; $i++) { 
+          switch ($blockMenu[$i]['type_position']) {
+            case 'left':
+              //asort($fruits, SORT_NUMERIC)
+              //echo $blockMenu[$i]['porydok'] ;
+              $blockLeftMenu[$i] = $blockMenu[$i];
+
+              break;
+            case 'top':
+              //asort($fruits, SORT_NUMERIC)
+              //echo $blockMenu[$i]['porydok'] ;
+              $blockTopMenu[$i] = $blockMenu[$i];
+              break;
+            case 'right':
+              //echo 'right';
+              //echo $blockMenu[$i]['porydok'] ;
+              $blockRightMenu[$i] = $blockMenu[$i];
+              break;
+            case 'center':
+              //echo 'center';
+              //echo $blockMenu[$i]['porydok'] ;
+              $blockCenterMenu[$i] = $blockMenu[$i];
+              break;            
+            default:
+              # code...
+              break;
+          }         
+        }
+
+
+
+
+    if($blockLeftMenu){
+      echo ' <ul class="l-menu" style="padding:0">';
+      foreach ($blockLeftMenu as $key => $value) { 
+         $active_lm='';
+        if($_SESSION['active_block'] == $value["url_title"] ){
+           $active_lm = 'style="display:block;"';
+           $active_lb_bg = 'active_l';
+         }
+        if($value['type_content']=='block'){      
+          echo ' <li class="menu '.$active_lb_bg.'"> <ul> ';        
+          echo ' <li class="button"><a href="#" class="box1">'.$value["name"].'</a></li> <li class="dropdown"'.$active_lm.'><ul>';
+          foreach ($blockLeftMenu as $key => $value1) {
+            $active_lm='';
+            $active_lb_bg = '';
+            if($_SESSION['active_block'] == $value["url_title"] && $_SESSION['active_subblock'] == $value1["url_title"] )
+                $active_lm = 'class = active_l';
+            if($value1['path'] == $value["path"] && $value1['type_content'] != 'block' ){
+              if($value1['url'] == '#'){
+                echo ' <li class="subblock_c '.$active_lm.'" path='.$value1["path"].'/'.$value1["id_mtt"].'><a  href=/'.$value["url_title"].'/'.$value1["url_title"].'>'.$value1["name"].'</a></li> ';
+              }else{
+                echo ' <li '.$active_lm.'><a href=/'.$value["url_title"].'/'.$value1["url_title"].'>'.$value1["name"].'</a></li> ';
+                //echo ' <div class="center-punct" class="pullDown" ><div class="punct_menu_lvl_1 slideUp ">'.$value1["name"].'</div></div>';
+               }
+            }
+          }
+          echo ' </ul></li></ul></li>';
+        }
+      }
+      echo ' </ul>';
+    }
+?>

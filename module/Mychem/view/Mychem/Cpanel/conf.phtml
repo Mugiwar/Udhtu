@@ -1,0 +1,270 @@
+<?php if (($params['users']== 'himsovrtehn') || ($params['users']== 'fuel') || ($params['users']== 'shevchenko')  || ($params['users']== 'himsovrtehn_85year')|| ($params['users']== 'tnr_2015') ):
+	
+?>
+<!-- ДМВ отправки письма участникам -->
+<div id=dmw_email style='display:none;border:1px solid black;border-top:none;width:500px;min-height:200px;position:absolute;top:200px;left:50%;background-color:white;' >
+	<!-- Шапка окна -->
+	<div style="position:relative;background:#cccccc url('/public/img/global/icon/ui-bg_highlight-soft_75_cccccc_1x100.png') 50% 50% repeat-x;">
+		<span style="display:block;padding:3px;font-weight:bold;border-top:1px solid grey;border-bottom:1px solid grey;">Отправка письма участнику</span>
+	</div>
+
+	<!-- Тело окна(письма) -->
+	<div style="min-height:inherit">
+		  <form action="POST" id="fm_create_otdel_worker">
+		
+
+		
+
+
+			<p><label for="to_email">От:</label>
+			<input type="text" name="to_email" id="to_email" readonly class="text ui-widget-content ui-corner-all"></p>
+		 	<p><label for="from_email">Кому:</label>
+			<input type="text" name="from_email" id="from_email" readonly class="text ui-widget-content ui-corner-all"> </p>
+			
+
+			<p><label for="dmw_email_message">Сообшение</label></p>
+			<textarea  name="dmw_email_message" id="dmw_email_message" rows="5" cols="50" style="margin: 0 10px;" ></textarea>
+
+			<p><label for="file">Прекрипить фаил</label>
+			<input type="file" name="file"></p>
+
+		  <!-- Allow form submission with keyboard without duplicating the dialog button -->
+		   <input type="hidden" id="id_user" name="id_user" value="0">
+
+		 
+		
+ 	 </form>
+
+		
+	</div>
+
+
+	<!-- Подвал окна -->
+	<div style="margin: 0 0 10px 0">				
+	<button style="float:right;margin:0 2px 2px">Отмена</button>
+	<button id="dmw_send_email" style="float:right;margin:0 2px 2px;">Отослать</button>
+	<span style="font-weight:bold;">Шаблоны писем</span>
+
+		<hr style="background:green;height:5px;margin:0 0 5px 0;width:99.6%;">
+		<button>Отказ</button>
+		<button>Исправить</button>
+
+	</div>
+</div>
+
+
+
+<br>
+<div>Вы <?=$user['name']?></div>
+<div>Ваши роль <?=$user['role']?></div>
+<div>Email - конференции <b id='conf_email'> <?=$conf_email?></b></div>
+
+<?php  
+	switch ($params['users']) {
+		case 'fuel':
+			echo "<center><h2>Данные по зареганным в фуел</h2></center>";
+			break;
+		case 'himsovrtehn':
+			echo "<center><h2>Данные по зареганным в Химсовртех</h2></center>";
+			break;
+		case 'himsovrtehn_85year':
+			echo "<center><h2>Данные по зареганным в Химсовртех</h2></center>";
+			break;
+		case 'tnr_2015':
+			echo "<center><h2>Данные по зареганным в tnr_2015</h2></center>";
+			break;
+
+	}
+
+ ?>
+<div id="tttt">sss</div>
+	<div class="sort_conf">
+							<div id="type_section">Все секции:</div>
+			<div class="sort_type">
+				<?php foreach ($topic_conf as $key => $value): ?>
+				<div idTopic=<?=$value['id'];?> ><?=$value['value'];?></div>
+				<?php ENDFOREACH;?>
+			</div></div> 
+ 
+<table border="1" style="margin:0 0 35px 0;">
+	<tr>
+		<th>№</th>
+		<th>E-mail</th>
+		<th>П.І.Б.</th>
+		<th>Назва роботи</th>
+		<th>Статус роботи</th>
+		<th>Оплата участі</th>
+		<th>Отображать в списке</th>
+	</tr>
+<?php 
+
+
+//var_dump($confInfo);
+
+
+foreach ($confInfo as $key => $value):
+?>
+
+	<tr>
+		<td><?php echo $cnt+=1;  ?></td>
+		<td class="send_email" title="ТЕЛЕФОН: <?= $value['mob_phone']?>"><?php echo $value['mail'] ?></td>
+		<td width="220" title="ОРГАНІЗАЦІЯ: <?= $value['organization']?>"><?php echo $value['last_name'].'<br> '.$value['name'].' '.$value['middle_name'] ?></td>
+		<td><?php echo $value['title_public'] ?></td>
+ <td><select id=<?=$value["id"];?> class="mu_status" name="mu_status_public">
+		<option disabled >Оберіть статус</option>
+		<option <?php if($value['mu_status'] == 2) echo "selected" ?> value="2">Не отримано</option>
+		<option  <?php if($value['mu_status'] == 3) echo "selected" ?> value="3">На перевірці</option>
+		<option  <?php if($value['mu_status'] == 4) echo "selected" ?> value="4">Повернено</option>
+		<option  <?php if($value['mu_status'] == 5) echo "selected" ?> value="5">Відхилино</option>
+		<option <?php if($value['mu_status'] == 1) echo "selected" ?> value="1">Прийнято</option>
+	 </select></p></td>
+		<td><input class="chb" id=<?=$value['id'];?> type="checkbox" name="mu_status_oplata" value=<?=$value['mu_status_oplata'];?> <?php if($value['mu_status_oplata'] == 1) echo "checked"  ?> ></td>
+		<td><input class="chb" id=<?=$value['id'];?> type="checkbox"  name="mu_status_view" value=<?=$value['mu_status_view'];?> <?php if($value['mu_status_view'] == 1) echo "checked"  ?> ></td>
+	</tr>	
+
+
+
+<?php ENDFOREACH; ?>
+</table>
+
+	
+
+<?php ENDIF; ?>
+
+
+
+
+<?php if (!$params):
+	
+?>
+
+				 <div class="box_conf">   
+					 <!--	<h2 class="punct_conf">Прогрес в технології переробки горючих копалин та хімотології паливно-мастильних матеріалів</h2>
+						
+						<div class="about_conf">               
+								<div class="about_conf_menu"><a href="http://udhtu.com.ua/conference/index.php?p=8"  target="_blank">Інформація</a></div>
+								<div class="about_conf_menu"><a href="/mychem/conf/users/fuel">Проверка подавших заявку</a></div>
+								
+								<div class="clear"></div>                   
+						</div>
+								 
+
+						<h2 class="punct_conf">Хімія та сучасні технології</h2>
+						<div class="about_conf">               
+								<div class="about_conf_menu"><a href="http://udhtu.com.ua/conference/index.php?p=26"  target="_blank">Інформація</a></div>
+								<div class="about_conf_menu"><a href="/mychem/conf/users/himsovrtehn">Проверка подавших заявку</a></div>
+									<div class="about_conf_menu"><a href="/mychem/conf/users/stats">Дима какая статистика</a></div>
+							 
+								<div class="clear"></div>                   
+						</div>
+
+
+						<h2 class="punct_conf">Хімія та сучасні технології 85 років</h2>
+						<div class="about_conf">               
+								<div class="about_conf_menu"><a href="http://udhtu.com.ua/conference/index.php?p=26"  target="_blank">Інформація</a></div>
+								<div class="about_conf_menu"><a href="/mychem/conf/users/himsovrtehn_85year">Проверка подавших заявку</a></div>
+									<div class="about_conf_menu"><a href="/mychem/conf/users/stats">Дима какая статистика</a></div>
+							
+								<div class="clear"></div>                   
+						</div> -->
+
+						<h2 class="punct_conf">Cучасні проблеми технології неорганічних речовин та ресурсозбереження</h2>
+						<div class="about_conf">               
+								<div class="about_conf_menu"><a href="http://udhtu.com.ua/conference/index.php?p=26"  target="_blank">Інформація</a></div>
+								<div class="about_conf_menu"><a href="/mychem/conf/users/tnr_2015">Проверка подавших заявку</a></div>
+									<div class="about_conf_menu"><a href="/mychem/cpanel/conf/users/stats">Дима какая статистика</a></div>
+							 <!-- <div class="about_conf_menu">Снять с регистрации</div> -->
+								<div class="clear"></div>                   
+						</div>
+
+<?php ENDIF; ?>
+
+
+
+
+<?php if (($params['users']== 'stats')):
+	
+?>
+<form method="POST" >
+
+		<p><b>Выберите даннные которые вы хотите получить..</b></p>
+	 <p><input type="checkbox" name="last_name" checked value="1">Фамилия<Br>
+	 <input type="checkbox" 	name="name"		checked   value="1">Имя<Br>
+	 <input type="checkbox" 	name="middle_name" checked value="1">Очество<Br> 
+	 <input type="checkbox"	 name="mail" 	   value="1">e-mail<Br> 
+	 <input type="checkbox"	 name="title_public" 	   value="1">title_public<Br>
+	 <input type="checkbox"	 name="mu_type_presentation" 	   value="1">mu_type_presentation<Br>
+	<input type="checkbox"	 name="mob_phone"  value="1">Телефон<Br>
+	  <input type="checkbox"	 name="mu_status_oplata" 	   value="1">mu_status_oplata<Br>
+	   <input type="checkbox"	 name="mu_status" 	   value="1">status<Br>
+
+	 <input type="checkbox"	 name="buy_book"  value="1">book</p>
+	<input type="checkbox"	 name="hotel"  value="1">hotel</p>
+	<input type="checkbox"	 name="organization"  value="1">Место работы</p>
+	<input type="checkbox"	 name="skype"  value="1">Skype\Gorod</p>
+	<input type="checkbox"	 name="mu_status_view"  value="1">Те что показуются на сайте</p>
+
+	  <input type="checkbox" 	name="section"		   value="1">Sexiy)<Br>
+	 <p><b>Выберите по чем сортировать..</b></p>
+
+	 <p><select id="gen_status_user" name="gen_status_user">
+		<option value=0 selected disabled>Статус пользователей</option>
+		<option value="1">Активній</option>
+		<option  value="2">Неактивній</option> 
+		<option  value="3">НА проверке</option>   
+		<option  value="4">Повернено</option>     
+		<option  value="5">Відхилено</option> 
+		<option  value="6">Удалено</option>  
+		<option  value="7">Дороббити</option>    
+	 </select></p>
+
+	 <p><select id="gen_type_conf" name="gen_conf">
+		<option value=0 selected disabled>Все конференции</option>
+		<option value="1">Фуел</option>
+		<option  value="2">Хим сорв техн</option>  
+		<option  value="3">Шевченківський дискурс сучасності</option>  
+		<option  value="4">Хим сорв техн 85</option> 
+		<option  value="5">tnr_2015</option>     
+	 </select></p>
+	 <input type="hidden" name="generator" value="gogo">
+	
+	 <p><input type="submit" value="Построить"></p>
+
+</form>
+
+<?php //var_dump($gen_info); ?>
+
+					   <table class="full_sort" border="1" style="margin: 0 15px 35px ;width:950px">
+<?php 
+
+
+//var_dump($partakerInfo);
+
+
+foreach ($gen_info as $key => $value):
+		if($value['hotel'] == 1)
+			$value['hotel'] = "Готель";
+		if($value['buy_book'] == 1)
+			$value['buy_book'] = "Книга";
+
+		if($value['mu_type_presentation'] == 1)
+			$value['mu_type_presentation'] = "усна";
+		if($value['mu_type_presentation'] == 2)
+			$value['mu_type_presentation'] = "стендова";
+		if($value['mu_type_presentation'] == 3)
+			$value['mu_type_presentation'] = "заочна участь";
+?>
+
+	<tr >
+		<td width="20"><?php echo $cnt+=1;  ?></td>
+		<td width="220"><?php echo $value['last_name'].'<br> '.$value['name'].' '.$value['middle_name'] ?></td>		
+		<td data="organization"><?php echo $value['skype'].'<br>'.$value['organization'].'<br>'.$value['mob_phone'].'<br>'.$value['mail'].'<br>'.$value['title_public'].'<br>'.$value['type'] ?></td>
+		<td data="oplata"><?php echo $value['mu_status_oplata'].'<br>'.$value['status'].'<br>'.$value['buy_book'].'<br>'.$value['hotel'].'<br>'.$value['mu_type_presentation'] ?></td> 
+		<td data="section"><?php echo $value['section_number']?></td>   
+
+	</tr> 
+
+<?php ENDFOREACH; ?>
+</table>
+
+<?php ENDIF; ?>

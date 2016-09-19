@@ -1,0 +1,2442 @@
+<?php header('Content-type: text/html; charset=utf-8'); ?>
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8" />
+		
+	<link rel="stylesheet" type="text/css" href="/public/css/main.css">  
+	<link rel="stylesheet" type="text/css" href="/public/css/mychem/front.css">
+	<link rel="stylesheet" type="text/css" href="/public/css/icomoon.css">
+	<link rel="stylesheet" href="/public/css/css/bootstrap.min.css">
+	<link rel="stylesheet" href="/public/css/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="/public/css/jqueryui.css">
+
+	<link rel="stylesheet" type="text/css" href="/public/css/mychem/croppic.css">
+
+
+
+	<script type="text/javascript" src="/public/js/jQuery-v1.8.2.js"></script>
+	<script type="text/javascript" src="/public/js/jquery.cookie.js"></script>
+	<script type="text/javascript" src="/public/js/mychem/jq_mychem.js"></script>	
+	<script type="text/javascript" src="/public/js/mychem/diff_match_patch.js"></script>
+	<script type="text/javascript" src="/public/js/front/mu_jq_main.js"></script>
+	<script type="text/javascript" src="/public/js/ckeditor/ckeditor.js?v=1"></script>
+	<script type="text/javascript" src="/public/js/jquery-ui.js"></script>
+
+	<script type="text/javascript" src="/public/js/croppic.js"></script>
+ <script>
+  $(function() {
+    $( "#accordion" ).accordion({
+      collapsible: true
+    });
+  });
+  </script>
+
+	<style>
+
+html,body{
+	margin: 0;
+	padding: 0;
+
+font-family: 'Lato', Arial, sans-serif;
+font-size: 14px;
+}
+
+
+
+
+.rmenu {
+    position: relative;   
+    width: 100px;
+    float: right;
+       
+
+     }
+
+.upd_crop_box{
+	margin-bottom: 5px
+}
+
+#cropContainer {
+    width: 500px;
+    height: 375px;
+    position: relative;
+    border: 1px solid #ccc;
+}
+
+
+#btn_check button {
+  position: relative;
+  display: inline-block;
+  color: #777674;
+  font-weight: bold;
+  text-decoration: none;
+  text-shadow: rgba(255,255,255,.5) 1px 1px, rgba(100,100,100,.3) 3px 7px 3px;
+  user-select: none;
+  /*padding: 1em 2em; */
+  outline: none;
+  border-radius: 3px / 100%;
+  background-image:
+   linear-gradient(45deg, rgba(255,255,255,.0) 30%, rgba(255,255,255,.8), rgba(255,255,255,.0) 70%),
+   linear-gradient(to right, rgba(255,255,255,1), rgba(255,255,255,0) 20%, rgba(255,255,255,0) 90%, rgba(255,255,255,.3)),
+   linear-gradient(to right, rgba(125,125,125,1), rgba(255,255,255,.9) 45%, rgba(125,125,125,.5)),
+   linear-gradient(to right, rgba(125,125,125,1), rgba(255,255,255,.9) 45%, rgba(125,125,125,.5)),
+   linear-gradient(to right, rgba(223,190,170,1), rgba(255,255,255,.9) 45%, rgba(223,190,170,.5)),
+   linear-gradient(to right, rgba(223,190,170,1), rgba(255,255,255,.9) 45%, rgba(223,190,170,.5));
+  background-repeat: no-repeat;
+  background-size: 200% 100%, auto, 100% 2px, 100% 2px, 100% 1px, 100% 1px;
+  background-position: 200% 0, 0 0, 0 0, 0 100%, 0 4px, 0 calc(100% - 4px);
+  box-shadow: rgba(0,0,0,.5) 3px 10px 10px -10px;
+}
+#btn_check button:hover {
+  transition: .5s linear;
+  background-position: -200% 0, 0 0, 0 0, 0 100%, 0 4px, 0 calc(100% - 4px);
+}
+#btn_check button:active {
+  top: 1px;
+}
+
+.udhtu-page{
+	width: 220px;
+
+}
+
+
+   label, input { display:block; }
+    input.text { margin-bottom:12px; width:50%; padding: .1em; }
+    fieldset { padding:0; border:0; margin-top:25px; }
+    h1 { font-size: 1.2em; margin: .6em 0; }
+    div#users-contain { width: 350px; margin: 20px 0; }
+    div#users-contain table { margin: .3em 0; border-collapse: collapse; width: 100%; }
+    div#users-contain table td, div#users-contain table th { border: 1px solid #eee; padding: .2em 10px; text-align: left; }
+    .ui-dialog .ui-state-error { padding: .3em; }
+    .validateTips { border: 1px solid transparent; padding: 0.3em; }
+
+
+
+
+
+
+
+
+
+
+.dr-menu {
+	/*width: 100%;
+	max-width: 400px;
+	min-width: 300px;*/
+	position: fixed;
+	font-size: 1.3em;
+	line-height: 2.5;
+	font-weight: 400;
+	color: #fff;
+	padding-top: 2em;
+}
+
+.dr-menu > div  {
+	cursor: pointer;
+	position: absolute;
+	width: 100%;
+	z-index: 100;
+}
+
+.dr-menu > div .dr-icon {
+	top: 0;
+	left: 0;
+	position: absolute;
+	font-size: 150%;
+	line-height: 1.6;
+	padding: 0 10px;
+	-webkit-transition: all 0.2s ease;
+	-moz-transition: all 0.2s ease;
+	transition: all 0.2s ease;
+}
+
+.dr-menu.dr-menu-open > div .dr-icon {
+	color: #009DE2;	
+	left: 100%;
+	-webkit-transform: translateX(-100%);
+	-moz-transform: translateX(-100%);
+	-ms-transform: translateX(-100%);
+	transform: translateX(-100%);
+}
+
+.dr-menu > div .dr-icon:after {
+	content: "\e9bd";
+	position: absolute;
+	font-size: 50%;
+	line-height: 3.25;
+	left: -10%;
+	opacity: 0;
+}
+
+.dr-menu.dr-menu-open > div .dr-icon:after {
+	opacity: 1;
+}
+
+.dr-menu > div .dr-label {
+	padding-left: 3em;
+	position: relative;
+	display: block;
+	color: #2E65AD;
+	font-size: 0.9em;
+	font-weight: 700;
+	letter-spacing: 1px;
+	text-transform: uppercase;
+	line-height: 2.75;
+	-webkit-transition: all 0.2s ease;
+	-moz-transition: all 0.2s ease;
+	transition: all 0.2s ease;
+}
+
+.dr-menu.dr-menu-open > div .dr-label {
+	-webkit-transform: translateY(-90%);
+	-moz-transform: translateY(-90%);
+	-ms-transform: translateY(-90%);
+	transform: translateY(-90%);
+}
+
+.dr-menu ul {
+	padding: 0;
+	margin: 0 3em 0 0;
+	list-style: none;
+	opacity: 0;
+	position: relative;
+	z-index: 0;
+	pointer-events: none;
+	-webkit-transition: opacity 0s linear 205ms;
+	-moz-transition: opacity 0s linear 205ms;
+	transition: opacity 0s linear 205ms;
+}
+
+.dr-menu.dr-menu-open ul {
+	opacity: 1;
+	z-index: 200;
+	pointer-events: auto;
+	-webkit-transition: opacity 0s linear 0s;
+	-moz-transition: opacity 0s linear 0s;
+	transition: opacity 0s linear 0s;
+}
+
+.dr-menu ul li {
+	display: block;
+	margin: 0 0 5px 0;
+	opacity: 0;
+	-webkit-transition: opacity 0.3s ease;
+	-moz-transition: opacity 0.3s ease;
+	transition: opacity 0.3s ease;
+}
+
+.dr-menu.dr-menu-open ul li {
+	opacity: 1;
+}
+
+.dr-menu.dr-menu-open ul li:nth-child(2) {
+	-webkit-transition-delay: 35ms;
+	-moz-transition-delay: 35ms;
+	transition-delay: 35ms;
+}
+
+.dr-menu.dr-menu-open ul li:nth-child(3) {
+	-webkit-transition-delay: 70ms;
+	-moz-transition-delay: 70ms;
+	transition-delay: 70ms;
+}
+
+.dr-menu.dr-menu-open ul li:nth-child(4) {
+	-webkit-transition-delay: 105ms;
+	-moz-transition-delay: 105ms;
+	transition-delay: 105ms;
+}
+
+.dr-menu.dr-menu-open ul li:nth-child(5) {
+	-webkit-transition-delay: 140ms;
+	-moz-transition-delay: 140ms;
+	transition-delay: 140ms;
+}
+
+.dr-menu.dr-menu-open ul li:nth-child(6) {
+	-webkit-transition-delay: 175ms;
+	-moz-transition-delay: 175ms;
+	transition-delay: 175ms;
+}
+
+.dr-menu.dr-menu-open ul li:nth-child(7) {
+	-webkit-transition-delay: 205ms;
+	-moz-transition-delay: 205ms;
+	transition-delay: 205ms;
+}
+
+.dr-menu ul li a {
+	display: inline-block;
+	padding: 0 20px;
+	color: #fff;
+}
+
+.dr-menu ul li a:hover {
+	color: #2E65AD;
+}
+
+.dr-icon:before, 
+.dr-icon:after {
+	position: relative;
+	font-family: 'icomoon';
+	speak: none;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	-webkit-font-smoothing: antialiased;
+}
+
+.dr-menu ul .dr-icon:before {
+	margin-right: 15px;
+}
+
+.dr-icon-lab:before {
+	content: "\e9aa";
+}
+
+.dr-icon-camera:before {
+	content: "\e002";
+}
+
+.dr-icon-heart:before {
+	content: "\e003";
+}
+
+.dr-icon-settings:before {
+	content: "\e004";
+}
+
+.dr-icon-switch:before {
+	content: "\e9b6";
+}
+
+.dr-icon-quill:before {
+	content: "\e016";
+}
+
+.dr-icon-user:before {
+	content: "\e971";
+}
+
+.dr-icon-menu:before {
+	content: "\e9bd";
+}
+
+.icon-folder{
+	font-size: 3.5em;
+	color:#2E65AD;
+
+}
+
+
+
+
+#left-menu .gallery li{
+	cursor: pointer;
+font-family: 'Lato', Arial, sans-serif;
+	width:200px;
+}
+
+#left-menu .gallery  li h6{
+
+font-size: 12px;
+margin: 0.1em;
+}
+
+#left-menu .gallery  li p{
+
+font-size: 11px;
+margin: 0.1em;
+float: left;
+margin-left: 20px;
+/* font-weight: bold; */
+color: rgb(48, 123, 55);
+}
+
+
+
+
+
+
+
+  #gallery {
+  /* float: left; */
+   min-height: 12em; 
+}
+  .gallery.custom-state-active { background: #eee; }
+    .gallery li { 
+  		float: left;
+  		padding: 0.4em; 
+  		text-align: center;
+  	 }
+  .udhtu-folder{ 
+		float: left;
+	    padding: 0.4em;
+	    /* margin: 0 0.4em 0.4em 0; */
+	    text-align: center;
+	    width: 100px;
+	    overflow: hidden;
+	    height: 150px;
+  	 }
+  .gallery li h5 { margin: 0 0 0.4em; cursor: move; }
+  /*.gallery li a { float: right; }*/
+  .gallery li a.ui-icon-zoomin { float: left; }
+  .gallery li a.ui-icon-pencil{ float: left; }
+  .gallery li a.ui-icon-clock { float: left; }
+  .gallery li a.ui-icon-alert { float: left; }
+  .gallery li a.ui-icon-circle-close { float: left; }
+   .gallery li a.ui-icon-circle-check { float: left; }
+  .gallery li img { width: 100%; cursor: move; }
+  /*.gallery div {font-size: 14px; max-width: 650px;  display: none; }*/
+ .gallery ul {
+ 	background-color: gray;
+    overflow: hidden;
+    height: auto;
+    min-height: 50px;
+    list-style: none;
+    padding: 0;
+ }
+
+ #gallery  h3 {
+ 	    
+    text-align: center;
+    background-color: aquamarine;
+    margin: 0;
+ }
+
+  #gallery .path_url {
+ 	    
+    display: block;
+    background-color: gray;
+    margin: 0;
+ }
+
+   #gallery .path_url a{ 	    
+	color:aquamarine;
+	
+ }
+    #gallery .path_url a:hover{ 	    
+	cursor: pointer;
+	border-bottom: 2px solid black; 
+ }
+
+.udhtu-file > li{
+	cursor: pointer;
+}
+
+/* всплывающее меню возле категорий*/
+/* The whole thing */
+.rc-catm {    
+    z-index: 1000;
+    position: absolute;
+  /*  overflow: hidden;*/
+    border: 1px solid #CCC;
+    white-space: nowrap;
+    font-family: sans-serif;
+    background: #FFF;
+    color: #333;
+    border-radius: 5px;
+    padding: 0;
+}
+
+.cm_subp{    
+    z-index: 1000;
+    position: absolute;
+    top: 0px;
+    left: 120px;
+    border: 1px solid #CCC;
+    white-space: nowrap;
+    font-family: sans-serif;
+    background: #FFF;
+    color: #333;
+    border-radius: 5px;
+    padding: 0;
+}
+
+/* Each of the items in the list */
+.rc-catm li {
+    padding: 8px 12px;
+    cursor: pointer;
+    list-style-type: none;
+}
+
+.rc-catm li:hover {
+    background-color: #DEF;
+}
+
+.rc-catm li:hover:first-child {
+    display: block;
+}
+
+
+
+
+
+
+
+
+
+
+
+  #trash { float: right; width: 32%; min-height: 100px; padding: 1%; }
+  #trash h4 { line-height: 16px; margin: 0 0 0.4em; }
+  #trash h4 .ui-icon { float: left; }
+  #trash .gallery div { display: none; }
+
+  #edit_all {  width: 32%; min-height: 100px; padding: 1%; }
+  #edit_all h4 { line-height: 16px; margin: 0 0 0.4em; }
+  #edit_all h4 .ui-icon { float: left; }
+  #edit_all .gallery div { display: none; }
+/* Starter CSS for Flyout Menu */
+.cssmenu {  
+	font-family: Verdana, Helvetica, Arial, sans-serif;
+
+	margin: auto;
+	margin-bottom: 20px;
+	cursor: pointer;
+}
+.cssmenu {
+	list-style: none;
+	-webkit-border-radius: 10px;
+		-moz-border-radius: 10px;
+		border-radius: 10px;
+}
+
+.l_menu ul{
+display: none;
+
+}
+.cssmenu ul {
+	
+	list-style: none;
+	padding: 0px;
+	margin: 0px;
+	text-indent: 0px;
+}
+.cssmenu li {
+	/*margin-top: 3px; */
+}
+
+
+.punct_menu_lvl_1  {
+	float:left;
+	position: relative;
+	margin: 5px;
+	width: 240px;
+	background: url('/public/img/front/menu_img/punct_lvl_1.gif') no-repeat;
+	/* padding: 6px 40px;*/
+}
+
+
+
+.cssmenu a,.punct_menu_lvl_1 a {
+	font: 12px Verdana;
+	color: #646464;
+	display: block;
+	padding: 6px 0 6px 40px;
+	height: 24px;
+	text-decoration: none;
+	/*background: url('/public/img/global/icon/punct_menu_bkgd.gif');*/
+}
+
+
+.block_menu a span {
+	display: block;
+padding-top: 5px;
+}
+
+
+.punct_menu_lvl_0 a,.punct_menu_lvl_1 a {
+	height: 17px;
+}
+.punct_menu_lvl_0 a {
+	background: url('/public/img/front/menu_img/punct1.gif') no-repeat;
+	/* padding: 6px 40px;*/
+}
+
+.punct_menu_lvl_0 a:hover {
+	background: url('/public/img/front/menu_img/h_punct1.gif') no-repeat !important;
+	/* padding: 6px 40px;*/
+}
+
+
+
+.punct_menu_lvl_1 a:hover {
+	background: url('/public/img/front/menu_img/h_punct_lvl_1.gif') no-repeat !important;
+		
+}
+
+
+.punct_menu_lvl_1 img {
+	position: absolute;
+	right: 25px;
+	/* padding: 6px 40px;*/
+}
+
+.cssmenu ul li {
+	float: left;
+	min-height: 1px;
+	line-height: 1em;
+	vertical-align: middle;
+}
+.cssmenu ul li.hover,
+.cssmenu ul li:hover {
+	position: relative;
+	z-index: 599;
+	cursor: default;
+}
+.cssmenu ul ul {
+list-style: none;
+	margin-top: 1px;
+	position: absolute;
+	top: 1px;
+	left: 99%;
+	z-index: 598;
+	width: 100%;
+}
+.cssmenu ul ul li {
+	float: none;
+}
+.cssmenu ul ul ul {
+	top: 1px;
+	left: 99%;
+}
+/*.cssmenu ul li:hover > ul {
+	visibility: visible;
+}*/
+.cssmenu ul li {
+	float: none;
+}
+.cssmenu ul ul li {
+	font-weight: normal;
+}
+
+
+.cssmenu ul li > ul {
+	display: none;
+}
+
+
+
+.cssmenu ul ul {
+	padding: 0 0 0 20px;
+}
+
+ .bbb{
+	display: block !important;
+ }
+
+
+ .aaa{
+	display: none;
+ }
+
+.active a{
+	background: url('/public/img/front/menu_img/h_punct1.gif') no-repeat !important;
+}
+
+
+
+.example-image{
+	height: 300px;
+	width: 200px;
+	border: whitesmoke 1px solid;
+
+}
+
+.qqq{
+	width: 700px;
+
+
+}
+
+.figny{
+float:left;
+}
+
+.figny a{
+font-weight: bold;
+color: white;
+font-size: 20px;
+text-decoration: none;
+
+}
+
+#dw_create_page{
+	display: none;
+	position: relative;
+	margin-bottom: 30px;
+}
+
+#dw_edit_page{
+	display: none;
+	position: relative;
+	margin-bottom: 30px;
+}
+
+
+
+#dw_create_razdelov{
+	display: none;
+	position: absolute;
+	min-height: 300px;
+	background: whitesmoke;
+	width: 500px;
+}
+
+
+
+.window_close{
+cursor: pointer;
+	position: absolute;
+top: 5px;
+right: 10px;
+}
+
+#list_page{
+overflow: hidden;
+
+}
+
+
+.list_page_content{
+cursor: pointer;
+float: left;
+margin: 20px 0 0 0;
+border: 1px solid;
+}
+
+
+#dmw{
+	
+
+}
+
+
+#content_page{
+	margin: 30px 0 0 0;
+}
+
+
+
+
+
+
+
+/* боковое меню */
+
+/* font awesome icons */
+@import url("//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css");
+
+/* open sans font */
+@import url("//fonts.googleapis.com/css?family=Open+Sans");
+
+
+
+/* LTR CSS */
+#snav.en {
+  left: 0;
+  text-align: left;
+}
+#snav.en  li span {
+  left: -100px;
+}
+#snav.en li a:hover span {
+  left: 35px;
+}
+
+/* RTL CSS */
+#snav.ar {
+  right: 0;
+  text-align: right;
+}
+#snav.ar  li span {
+  right: -100px;
+}
+#snav.ar li a:hover span {
+  right: 35px;
+}
+
+/* main SideNav.css styles */
+#snav {
+  position: fixed;
+  top:20%;
+  z-index: 9999;
+  font-size: 18px;
+  font-family: 'Open Sans', sans-serif;
+}
+#snav ul {
+  list-style: none;
+}
+#snav * {
+  margin: 0;
+  padding: 0;
+  outline: 0;
+  transition: all .5s ease;
+  -webkit-transition: all .5s ease;
+  -moz-transition: all .5s ease;
+  -o-transition: all .5s ease;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+#snav li a {
+  text-decoration: none;
+  color: #fff;
+  display: block;
+  position: relative;
+}
+#snav .fa {
+  vertical-align: middle;
+  font-size: 18px;
+  width: 35px;
+  height: 35px;
+  line-height: 35px;
+  text-align: center;
+  position: relative;
+  z-index: 4;
+}
+#snav li span {
+  font-size: 15px;
+  vertical-align: middle;
+  height: 35px;
+  line-height: 35px;
+  width: auto;
+  white-space: nowrap;
+  overflow: hidden;
+  display: block;
+  padding: 0 15px;
+  position: absolute;
+  top: 0;
+  visibility: hidden;
+  z-index: 3;
+}
+#snav li a:hover .fa {
+  transform: rotate(720deg);
+}
+#snav li a:hover span {
+  visibility: visible;
+}
+
+/* colors styles */
+
+/* menu items title background used for browsers not supporting :nth-child */
+#snav li span {
+  background-color: #555;
+}
+/* icons color and background before hover  */
+#snav li .fa {
+  background-color: #EEE;
+  color: #555
+}
+/* icons hover color */
+#snav li a:hover .fa {
+  color: #fff;
+}
+/* repeated colors from 1 to 10 each hover color repeated after 10 menu items */
+#snav li:nth-child(10n+1) span, #snav li:nth-child(10n+1) a:hover .fa {
+  background-color: #8350DD;
+}
+#snav li:nth-child(10n+2) span, #snav li:nth-child(10n+2) a:hover .fa {
+  background-color: #4EC5DB;
+}
+#snav li:nth-child(10n+3) span, #snav li:nth-child(10n+3) a:hover .fa {
+  background-color: #3DC25D;
+}
+#snav li:nth-child(10n+4) span, #snav li:nth-child(10n+4) a:hover .fa {
+  background-color: #99BE24;
+}
+#snav li:nth-child(10n+5) span, #snav li:nth-child(10n+5) a:hover .fa {
+  background-color: #38c;
+}
+#snav li:nth-child(10n+6) span, #snav li:nth-child(10n+6) a:hover .fa {
+  background-color: #ff0000;
+}
+#snav li:nth-child(10n+7) span, #snav li:nth-child(10n+7) a:hover .fa {
+  background-color: #000;
+}
+#snav li:nth-child(10n+8) span, #snav li:nth-child(10n+8) a:hover .fa {
+  background-color: #F1A111;
+}
+#snav li:nth-child(10n+9) span, #snav li:nth-child(10n+9) a:hover .fa {
+  background-color: #777;
+}
+#snav li:nth-child(10n+10) span, #snav li:nth-child(10n+10) a:hover .fa {
+  background-color: #30555C;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	</style>
+	<title>UDHTU - conference</title>
+
+<script>
+	$(function() {
+		var drop_this;
+
+
+
+
+
+
+var YTMenu = (function() {
+
+    function init() {
+
+        [].slice.call( document.querySelectorAll( '.dr-menu' ) ).forEach( function( el, i ) {
+
+            var trigger = el.querySelector( 'div.dr-trigger' ),
+                icon = trigger.querySelector( 'span.dr-icon-menu' ),
+                open = false;
+
+            trigger.addEventListener( 'click', function( event ) {
+                if( !open ) {
+                    el.className += ' dr-menu-open';
+                    open = true;
+                }
+            }, false );
+
+            icon.addEventListener( 'click', function( event ) {
+                if( open ) {
+                    event.stopPropagation();
+                    open = false;
+                    el.className = el.className.replace(/\bdr-menu-open\b/,'');
+                    return false;
+                }
+            }, false );
+
+        } );
+
+    }
+
+    init();
+
+})();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var dmp = new diff_match_patch();
+
+
+
+function launch() {
+  var text1 = document.getElementById('text1').innerHTML;
+  var text2 = document.getElementById('text2').innerHTML;
+
+ 	 	
+  //dmp.Diff_Timeout = parseFloat(document.getElementById('timeout').value);
+  //dmp.Diff_EditCost = parseFloat(document.getElementById('editcost').value);
+
+  var ms_start = (new Date()).getTime();
+  var d = dmp.diff_main(text1, text2);
+  var ms_end = (new Date()).getTime();
+ dmp.diff_cleanupSemantic(d);
+ var ds = dmp.diff_prettyHtml(d);
+  //document.getElementById('text1').value = ds + '<BR>Time: ' + (ms_end - ms_start) / 1000 + 's';
+
+  document.getElementById('text3').innerHTML = '';
+  document.getElementById('text3').innerHTML = ds;
+  //$( ds ).appendTo("#text3" );
+}
+
+
+$('body').on('click','#btn_check > button',function(){	
+
+switch ($(this).attr('type')) {
+    case '1':
+
+
+
+
+
+$("#dw_create_razdelov").remove();
+				$("#dw_create_razdelov").css('display','none');
+				$("#dw_create_page").css('display','none');  
+var myDate = new Date();
+var displayDate = (myDate.getMonth()+1) + '/' + (myDate.getDate()) + '/' + myDate.getFullYear();
+
+var img = $('<div id="dw_create_razdelov" style="height: auto;" class="slideExpandUp object"><form type="fm_edit_page" action="POST" id="fm_create_razdelov"><p><b>Форма одобрения контента</b></p><p>Одобренно: Одобрителем</p><p>Обновленно: Обновителем</p><p>Дата: '+displayDate+'</p><p><p>Примечание/Причина одобрения</p><textarea rows="5" cols="45"  name="mu_notification"></textarea></p><input type="hidden" name="data_id" value="'+$(this).attr('data_id')+'"><input type="hidden" name="data_or_id" value="'+$(this).attr('data_or_id')+'"><input type="hidden" name="edit" value="check_in_page"><input type="hidden" name="check_status" value="1"></form><button action="update" id="save_razdel">Одобрить</button></div>').appendTo( "body" ); 			
+				$("#dw_create_razdelov").show("normal");  
+
+					        setTimeout(function() {
+					          img.dialog({
+					            title: 'Оповищение',
+					            width: 500,
+					            modal: true
+					          });
+					        }, 1 );
+					      
+
+						
+
+
+
+
+
+
+
+       
+        break;
+    case 'edit_1':
+
+
+
+    						
+
+
+       
+        break;
+    case 'original':
+    				$('#text3').empty();
+    				$('#text2').css('display','none');
+       				$('#text1').css('display','block');
+        break;
+    case 'update':
+    				$('#text3').empty();
+    				$('#text1').css('display','none');
+       				$('#text2').css('display','block');
+        break;   
+    case '5':
+
+
+
+							$("#dw_create_razdelov").remove();
+											$("#dw_create_razdelov").css('display','none');
+											$("#dw_create_page").css('display','none');  
+							var myDate = new Date();
+							var displayDate = (myDate.getMonth()+1) + '/' + (myDate.getDate()) + '/' + myDate.getFullYear();
+
+							var img = $('<div id="dw_create_razdelov"  class="slideExpandUp object"><form type="folder" action="POST" id="fm_create_razdelov"><p><b>Вам необходимо указать причину отказа</b></p><p>(например: нужно добавить данные/отказанно с выше) - <b>данное оповишение будет показанно обновителю</b></p><p>Дата: '+displayDate+'</p><p><textarea rows="5" cols="45"  name="mu_notification"></textarea><input type="hidden" name="data_id" value="'+$(this).attr('data_id')+'"><input type="hidden" name="data_or_id" value="'+$(this).attr('data_or_id')+'"><input type="hidden" name="edit" value="check_in_page"><input type="hidden" name="check_status" value="5"></p></form><button action="update" id="save_razdel">Отказать</button></div>').appendTo( "body" ); 			
+											$("#dw_create_razdelov").show("normal");  
+
+												        setTimeout(function() {
+												          img.dialog({
+												            title: 'Оповищение',
+												            width: 500,
+												            modal: true
+												          });
+												        }, 1 );
+
+
+
+												      //  $("#dw_create_razdelov").remove();
+
+
+
+
+
+       
+        break;   
+    case 'razniza':
+    				$('#text1').css('display','none');
+      				$('#text2').css('display','none');
+      				launch();
+       	 break;   
+
+    default:
+       
+        break;
+}
+
+
+
+
+
+
+
+
+		});
+
+
+
+
+
+		//Кнопка Х закрытия окна создания контента
+		$('body').on('click','.window_close', function(){
+			$(".window_close").parent().fadeOut("fast");
+			$('#fm_create_razdelov').trigger('reset');	
+			$("#dw_edit_page").remove();		
+			// CKEDITOR.instances['editor'].setData('');
+		});
+
+		$('body').on('click','.ui-button', function(){
+			$(".window_close").parent().fadeOut("fast");
+			$('#fm_create_razdelov').trigger('reset');	
+			$("#dw_edit_page").remove();		
+			// CKEDITOR.instances['editor2'].setData('');
+		});
+
+
+
+		//Сортировка левого меню
+		$( ".column" ).sortable({		 
+			handle: ".portlet-header",
+			cancel: ".portlet-toggle",
+			placeholder: "portlet-placeholder ui-corner-all"
+		});
+
+ 		/*/Сортировка левого меню ????? или перетаскивание
+		$(".portlet")
+			.addClass( "ui-widget  ui-helper-clearfix ui-corner-all" )
+			.find( ".portlet-header" )
+			.addClass( "ui-widget-header ui-corner-all" );
+			*/ 
+ 
+		//перетаскивание  и создание блоков\пунктов\рзделов
+
+
+
+
+
+
+		$( "#catalog div" ).draggable({
+			appendTo: "body",			
+			revert: "invalid",
+			helper: "clone",
+			start: function(event, ui) { 
+				  $(".cssmenu ul").each(function (i) {
+				  		if (!$(this).find('li').length) {
+							$(this).parent().css('border','1px solid black');
+							$(this).css('min-height','30px');
+							$(this).css('display','block');
+						}
+					});
+			},
+			stop: function(event, ui) {
+							  $(".cssmenu li").css('border','');
+							  $(".cssmenu ul").css('min-height','');
+			}
+
+			
+		});
+
+		$( ".cart li ul > li" ).draggable({
+			//appendTo: "body",
+			revert: true,
+			//helper: "clone",
+		    //cursor: "move"
+		});
+
+
+		//Функция транслетирования
+		function send(text){
+			 var res='';
+			 //var text=document.getElementById('text').value;
+			 var transl={А:'A', а:'a', Б:'B', б:'b', В:'V', в:'v', Г:'G', г:'g',
+			 Д:'D', д:'d', Е:'E', е:'e', Ё:'Yo', ё:'yo', Ж:'Zh', ж:'zh', З:'Z', з:'z',
+			 И:'I', и:'i', ї:'yi', Й:'Y', й:'y', К:'K', к:'k', Л:'L', л:'l', М:'M', м:'m',
+			 Н:'N', н:'n', О:'O', о:'o', П:'P', п:'p', Р:'R', р:'r', С:'S', с:'s',
+			 Т:'T', т:'t', У:'U', у:'u', Ф:'F', ф:'f', Х:'H', х:'h', Ц:'C', ц:'c',
+			 Ч:'Ch', ч:'ch', Ш:'Sh', ш:'sh', Щ:'Sch', щ:'sch', Ъ:'', ъ:'', Ы:'Y', ы:'y',
+			 Ь:'', ь:'', Э:'E', э:'e', Є:'e', є:'e', Ю:'Yu', ю:'yu', Я:'Ya', я:'ya', і:'i', І:'I', ' ':'_'};
+
+			 for(i=0;i<text.length;i++) {
+			    if(transl[text[i]]!=undefined) res+=transl[text[i]];
+			    else res+=text[i];
+			 }
+			 res=res.replace(/Cz(?=i|e|y|j|I|E|Y|J)/g, "C");
+			 res=res.replace(/cz(?=i|e|y|j|I|E|Y|J)/g, "c");
+			 return res.toLowerCase();
+		}
+
+		//Дублирования названия  создаваемого контента на транслите для урл_титле
+		$('body').on('keyup','.name_url', function(){
+			  $(".url_title").val(send($('.name_url').val()));
+		});
+
+		
+		//Перетаскивания блока
+		$( "#left-menu" ).droppable({   
+			greedy: true, 
+			activeClass: "",
+			hoverClass: "",
+			accept: "#catalog > div",
+			drop: function( event, ui ) {
+
+					var dmw = $( '<div><form action="POST" id="fm_create_razdelov"><p><b>Форма добавления раздела </b></p><p><label for="name">Название раздела</label><Br><input type="text" name="mu_name" class="name_url"><Br><label for="url_title">как будет отображаться ссылка на транслите(можете поправить)</label><Br><input type="text" name="mu_url_title" class="url_title"><Br><input type="hidden" name="insert" value="block"><input type="hidden" name="type_content" value="'+$(this).attr('type')+'"><input type="hidden" name="position" value="'+$(this).attr('position')+'"><input type="hidden" name="type_face" value="'+$(this).attr('type_face')+'"/></p></form><button action="add" id="save_razdel">Сохранить</button></div>' ).appendTo( "body" );	
+        			//<input type="checkbox" name="mu_status_chb_rb" id="status" value="1"><label for="status">Показывать данный блок или скрыть</label>
+					        setTimeout(function() {
+					          dmw.dialog({
+					          	beforeClose: function( event, ui ) {					          	
+        							$('.ui-dialog').remove();
+        							$('#fm_create_razdelov').remove();
+
+					          	},
+					            title: 'title',					           
+								width: 500,
+					            modal: true
+					          });
+					        }, 1 ); 
+
+
+
+				}
+		});
+
+		//Перетаскивания пункта
+		$( ".menu li" ).droppable({
+			greedy: true, 
+			activeClass: "",
+			hoverClass: "",
+			accept:  "#catalog > div",
+			drop: function( event, ui ) {
+				
+				DMW_create_page_fd($( this ));
+
+
+			}
+		});
+
+		//Перетаскивания центрального пункта
+		$( "#center-punct" ).droppable({
+			activeClass: "",
+			hoverClass: "",
+			accept: ":not(.ui-sortable-helper)",
+			drop: function( event, ui ) {
+				drop_this =  $( this );
+				$( this ).find( ".placeholder" ).remove();
+				$("#dw_create_razdelov").remove();
+				$("#dw_create_razdelov").css('display','none');
+				$("#dw_create_page").css('display','none');  
+				$("#catalog").after('<div id="dw_create_razdelov" class="slideExpandUp object"><form action="POST" id="fm_create_razdelov"><p><b>Форма добавления центрального пункта</b></p><p><label for="name">Название пункта</label><Br><input type="text" name="mu_name" id="name"><Br><label for="url_title">как будет отображаться ссылка на транслите(можете поправить)</label><Br><input type="text" name="mu_url_title" id="url_title"><Br><input type="radio" name="url" id="rb1" value="1"><label for="rb1">URL</label><input type="radio" name="url" id="rb2" value="1"><label for="rb2">Каталог</label><Br><input type="checkbox" name="mu_status_chb_rb" id="status" value="1"><label for="status">Показывать данный пункт или скрыть</label><input type="hidden" name="insert" value="center_punct"><input type="hidden" name="mu_block" value="'+drop_this.find("div").attr("block")+'"><input type="hidden" name="mu_parents" value="'+drop_this.find("div").attr("parents")+'"></p></form><button action="add" id="save_razdel">Сохранить</button><div class="window_close">X</div></div>'); 			
+				$("#dw_create_razdelov").show("normal");  				
+			}
+		});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		//Создание блока (в диологовом окне)
+		$('body').on('click','#save_razdel', function(){
+
+var data_form;
+
+
+
+			switch ($(this).attr('action')) {
+				case 'add':
+							if ($(this).attr('type') == 'page') {
+					 			$('#editor2').val(CKEDITOR.instances['editor2'].getData());
+					 		}
+							data_form   = $('#fm_create_razdelov').serialize();
+					break;
+				case 'update':
+								id_form = $(this).prev().attr('id'); 
+							if ($(this).attr('type') == 'page') {
+					 			$('#editor2').val(CKEDITOR.instances['editor2'].getData());
+					 		}
+					 		//alert(id_form);
+							data_form   = $('#'+id_form).serialize();
+
+					
+					break;
+				
+				default:
+					
+					break;
+			}
+
+			
+			$("#dw_create_razdelov").fadeOut("slow");
+
+			$("#dw_create_page").fadeOut("slow");			
+			$("#dw_edit_page").remove();
+			$('#fm_create_razdelov').trigger('reset');
+			console.log( data_form);
+			$.ajax({
+				url: document.location.href,
+				type: 'POST',
+				dataType: 'json',  
+				data: data_form,
+				success: function(datas){		
+					//console.log( datas);
+
+						location.href =document.location.href;
+
+						//console.log( datas['name']);
+						/*
+					switch (datas['id']){
+						case 1:
+								drop_this.append("<div    class='cssmenu cart l_menu portlet stretchLeft object'><li class='block_menu has-sub block_sub '  style='background: url(/public/img/front/menu_img/block1.gif) no-repeat'><a class='portlet-header' href='#'><span >"+datas['name']+"</span></a><ul class='portlet-content' ></ul></li></div>");
+							break;
+						case 2:
+								//drop_this.append('<div class="punct_menu_lvl_0 slideUp punct_sub "><a href="">'+datas['name']+'</a></div>');
+							break;
+						case 3:
+								//drop_this.append('<div class="punct_menu_lvl_1 slideUp "><a href="/mychem/adminka-site-udhtu/edit/46">'+datas['name']+'<img class="pulse" src="/public/img/global/icon/info_err.png"></a></div>');
+							break;
+						case 4:
+								
+							break;		
+						default:
+							//alert("4 switch 372  stroka layouta");
+							break;
+					}*/
+				}
+			});
+		});
+
+
+
+
+
+
+
+
+
+
+
+
+    // there's the gallery and the trash
+    var $gallery = $( "#gallery" ),    		 	
+      $trash = $( "#trash" );
+ 
+    // let the gallery items be draggable
+    $( "li", $gallery ).draggable({
+    	
+      cancel: "a.ui-icon", // clicking an icon won't initiate dragging
+      revert: "invalid", // when not dropped, the item will revert back to its initial position
+      containment: "document",
+      helper: "clone",
+      cursor: "move"
+    });
+
+
+
+
+
+
+
+		$( "#edit_all" ).droppable({
+			//greedy: true, 
+			activeClass: "ui-state-highlight",
+			hoverClass: "",
+			//accept: "#left-menu > div",
+			drop: function( event, ui ) {				
+				var status_show = 'checked',
+					select_dialog;
+				drop_this =  $( this );
+				//alert(ui.draggable.find("a").css('opacity'));
+
+
+				switch (ui.draggable.attr('type')) {
+					case 'block':
+						if (ui.draggable.find("span").css('opacity')!= 1) {
+							status_show = '';
+						};
+						select_dialog = '<div id="dw_create_razdelov" class="slideExpandUp object"><form action="POST" id="fm_create_razdelov"><p><b>Форма редактирования блока левого меню</b></p><p><label for="name">Название блока</label><Br><input type="text" name="mu_name" id="name" value="'+ui.draggable.find("span").text()+'"><Br><label for="url_title">как будет отображаться ссылка на транслите(можете поправить)</label><Br><input type="text" name="mu_url_title" id="url_title" value="'+send(ui.draggable.find("span").text())+'"><Br><input type="checkbox" name="mu_status_chb_rb" id="status" '+status_show+' value="1"><label for="status">Показывать данный блок или скрыть</label><input type="hidden" name="edit" value="block"><input type="hidden" name="id" value='+ui.draggable.attr("data_id")+'></p></form><button action="update" id="save_razdel">Сохранить</button><div class="window_close">X</div></div>';
+
+
+
+
+
+						break;
+					case 'punct':
+
+						if (ui.draggable.find("a").css('opacity')!= 1) {
+							status_show = '';
+						};
+						select_dialog = '<div id="dw_create_razdelov" class="slideExpandUp object"><form action="POST" id="fm_create_razdelov"><p><b>Форма редактирования пункта</b></p><p><label for="name">Название пункта</label><Br><input type="text" name="mu_name" id="name"  value="'+ui.draggable.find("a").text()+'"><Br><label for="url_title">как будет отображаться ссылка на транслите(можете поправить)</label><Br><input type="text" name="mu_url_title" id="url_title"  value="'+send(ui.draggable.find("a").text())+'"><Br><input type="radio" name="url" id="rb3" value="1"><label for="rb3">Self</label><input type="radio" name="url" id="rb1" value="1"><label for="rb1">URL</label><input type="radio" name="url" id="rb2" value="1"><label for="rb2">Каталог</label><Br><input type="checkbox" name="mu_status_chb_rb" id="status" '+status_show+' value="1"  ><label for="status">Показывать данный пункт или скрыть</label><input type="hidden" name="edit" value="punct"><input type="hidden" name="mu_block" value="'+ui.draggable.closest(".cart").attr("data")+'"><input type="hidden" name="id" value="'+ui.draggable.attr("data_id")+'"></p></form><button  action="update" id="save_razdel">Сохранить</button><div class="window_close">X</div></div>';
+
+						break;
+
+					case 'center_punct':
+
+						if (ui.draggable.find("a").css('opacity')!= 1) {
+							status_show = '';
+						};
+						select_dialog = '<div id="dw_create_razdelov" class="slideExpandUp object"><form action="POST" id="fm_create_razdelov"><p><b>Форма редактирования центрального пункта</b></p><p><label for="name">Название пункта</label><Br><input type="text" name="mu_name" id="name"  value="'+ui.draggable.find("a").text()+'"><Br><label for="url_title">как будет отображаться ссылка на транслите(можете поправить)</label><Br><input type="text" name="mu_url_title" id="url_title"  value="'+send(ui.draggable.find("a").text())+'"><Br><input type="radio" name="url" id="rb1" value="1"><label for="rb1">URL</label><input type="radio" name="url" id="rb2" value="1"><label for="rb2">Каталог</label><Br><input type="checkbox" name="mu_status_chb_rb" id="status" '+status_show+' value="1"  ><label for="status">Показывать данный пункт или скрыть</label><input type="hidden" name="id" value="'+ui.draggable.attr("data_id")+'"><input type="hidden" name="edit" value="center_punct"><input type="hidden" name="mu_block" value="'+ui.draggable.attr("block")+'"></p></form><button action="update" id="save_razdel">Сохранить</button><div class="window_close">X</div></div>';
+
+						break;
+
+
+					case 'page':
+
+					      	 var img = $( '<div id="dw_edit_page" class="slideExpandUp object"><form method="POST" id="fm_create_razdelov"><textarea name="editor2" id="editor2">'+ui.draggable.find("textarea").text()+'</textarea><p>Заголовок</p><input  type="text" name="mu_title" value="'+ui.draggable.find("h5").text()+'" /><p>preview</p><textarea rows="5" cols="45"  name="mu_preview">'+ui.draggable.find("div").text()+'</textarea>		<input type="hidden" name="edit" value="page"/><input type="hidden" name="mu_ints" value="'+ ui.draggable.find("textarea").attr( "data_id" )+'"/><input type="submit"></form>		<button action="update" type="page" id="save_razdel">Сохранить</button></div>' ).appendTo( "body" );	
+
+					        setTimeout(function() {
+					          img.dialog({
+					            title: ui.draggable.find("h5").text(),
+					            width: 800,
+					            modal: true
+					          });
+					        }, 1 );
+					      
+		                    setTimeout(function() {
+		                    	//CKEDITOR.replace( 'editor2');
+
+
+		                    	CKEDITOR.replace( 'editor2', {
+								  // filebrowserBrowseUrl :  '/browser/browse.php' , 
+								  toolbar :"<?php echo $_SESSION['storageUser']['role']?>"
+								});
+
+
+
+
+
+													
+					        }, 5 );
+															
+						break;
+
+					case 'check_page':
+
+				
+				  
+				$("#check_page").remove();
+
+						
+
+ 	//$("input[name='newsletter']").next().text(" is newsletter");
+ 	
+
+      	 var img = $( '<div id="check_page" class="slideExpandUp object"><div id="btn_check"><button type="original" title="Оригінал"">Оригінал</button><button type="update" title="Виправлена версія">Виправлена версія</button><button type="razniza" title="Показати різницю">Показати різницю</button><button data_id="'+ui.draggable.find("textarea[content='update']").attr('data_id')+'" data_or_id="'+ui.draggable.find("textarea[content='or']").attr('data_or_id')+'" type="1" data_id="" title="Затвердити">Затвердити</button><button type="edit_1" title="Поправити та затвердити">Поправити та затвердити</button><button data_id="'+ui.draggable.find("textarea[content='update']").attr('data_id')+'" data_or_id="'+ui.draggable.find("textarea[content='or']").attr('data_or_id')+'" type="5" title="Відмовити"">Відмовити</button> </div> <form method="POST" id="fm_edit_page">  <div style="display:none;"  id=text1>'+ui.draggable.find("textarea[content='or']").text()+'</div><div  id=text2>'+ui.draggable.find("textarea[content='update']").text()+'</div><div  id=text3></div></form></div>' ).appendTo("#content" );	
+
+
+      
+
+						
+						break;
+
+
+					
+					default:
+						
+						break;
+				}
+
+
+				$( this ).find( ".placeholder" ).remove(); 
+				$("#dw_create_razdelov").remove();
+				$("#dw_create_razdelov").css('display','none');
+				$("#dw_create_page").css('display','none');   
+				$("#catalog").after(select_dialog); 				
+				$("#dw_create_razdelov").show("normal"); 
+							
+			}
+		});
+
+
+
+
+
+
+//---------------Фордма добовления воркера к отделу
+
+
+
+$('#get_mus_login').on('click',function(){			
+
+
+//alert($("#mu_main_job option:selected").text());
+//data_form   = $('#fm_create_otdel_worker').serialize();
+//console.log(data_form);
+	$.ajax({
+		url: document.location.href,
+		type: 'POST',
+		dataType: 'json',  
+		data: "mus_login="+$('#mus_login').val(),
+		success: function(datas){	
+			for (var i in datas){
+				$('#fio').val(datas[i].last_name+' '+datas[i].name+' '+datas[i].middle_name);
+				$('#email').val(datas[i].mail);
+				$('#id_user').attr('value',datas[i].id);
+			console.log( datas[i].id);
+		}
+		}
+	});
+
+
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var dialog, form,fios
+ 
+      // From http://www.whatwg.org/specs/web-apps/current-work/multipage/states-of-the-type-attribute.html#e-mail-state-%28type=email%29
+      emailRegex = /^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/,
+      fio_layout = $( "#fio_layout" ),
+      fio = $( "#fio" ),
+      email = $( "#email" ),
+       job_comment = $( "#job_comment" ),
+      log = $( "#log" ),
+    
+      allFields = $( [] ).add( fio_layout ).add( email ).add( job_comment ).add( fio ),
+      tips = $( ".validateTips" );
+ 
+    function updateTips( t ) {
+      tips
+        .text( t )
+        .addClass( "ui-state-highlight" );
+      setTimeout(function() {
+        tips.removeClass( "ui-state-highlight", 1500 );
+      }, 500 );
+    }
+ 
+    function checkLength( o, n, min, max ) {
+      if ( o.val().length > max || o.val().length < min ) {
+        o.addClass( "ui-state-error" );
+        updateTips( "Length of " + n + " must be between " +
+          min + " and " + max + "." );
+        return false;
+      } else {
+        return true;
+      }
+    }
+ 
+    function checkRegexp( o, regexp, n ) {
+      if ( !( regexp.test( o.val() ) ) ) {
+        o.addClass( "ui-state-error" );
+        updateTips( n );
+        return false;
+      } else {
+        return true;
+      }
+    }
+ 
+    function addUser() {
+      var valid = true;
+      allFields.removeClass( "ui-state-error" );
+ 
+     // valid = valid && checkLength( name, "username", 3, 16 );
+    //  valid = valid && checkLength( email, "email", 6, 80 );
+    //  valid = valid && checkLength( password, "password", 5, 16 );
+ 
+     // valid = valid && checkRegexp( name, /^[a-z]([0-9a-z_\s])+$/i, "Username may consist of a-z, 0-9, underscores, spaces and must begin with a letter." );
+   //   valid = valid && checkRegexp( email, emailRegex, "eg. ui@jquery.com" );
+     // valid = valid && checkRegexp( password, /^([0-9a-zA-Z])+$/, "Password field only allow : a-z 0-9" );
+ 		if(fio_layout.val()) 		
+ 			fios = fio_layout.val()
+ 		else 
+ 			fios = fio.val() 
+
+
+
+
+
+
+
+      if ( valid ) {
+        $( "#users tbody" ).append( "<tr>" +
+          "<td><img  width='100px' height='100px' src=''></td>" +
+          "<td>" + fios + "</td>" +
+          "<td>" + $("#mu_main_job option:selected").text() + "<br>("+ job_comment.val() +")</td>" +        
+          "<td>" + email.val() + "</td>" +
+          
+         
+          "<td><button>Подробнее</button></td>" +
+        "</tr>" );
+        dialog.dialog( "close" );
+      }
+      return valid;
+    }
+ 
+    dialog = $( "#dialog-form" ).dialog({
+      autoOpen: false,
+      height: 500,
+      width: 600,
+      modal: true,
+      buttons: {
+        "Добавить сотрудника": function() {
+
+							  	data_form   = $('#fm_create_otdel_worker').serialize();
+								console.log(	data_form);
+								$.ajax({
+									url: document.location.href,
+									type: 'POST',
+									dataType: 'json',  
+									data: data_form,
+									success: function(datas){	
+										for (var i in datas){
+											
+											console.log( datas[i].id);
+										}
+									}
+								});
+
+
+
+
+      	  addUser();
+    	},
+        Cancel: function() {
+
+
+
+          dialog.dialog( "close" );
+        }
+      },
+      close: function() {
+        form[ 0 ].reset();
+        allFields.removeClass( "ui-state-error" );
+      }
+    });
+ 
+    form = dialog.find( "form" ).on( "submit", function( event ) {
+      event.preventDefault();
+      addUser();
+    });
+ 
+    $( "#create-user" ).button().on( "click", function() {
+      dialog.dialog( "open" );
+    });
+  
+
+
+
+
+//--------КОНЕЦ-------Фордма добовления воркера к отделу
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+ function DMW_create_page_fd($item ) {
+
+var data_id,type,text_alert;
+
+
+text_alert= $item.closest(".path").attr("path");
+
+//$item.closest(".column").attr("id") left\right\top\bottom - menu
+
+	
+
+
+
+$( '<div id="dmw"  class="ui-state-error-text"><p><span class="ui-icon  ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span><span style="color:black;">ВЫ хотите создать в:</span><br> '+text_alert+'</p></div>' ).appendTo( "body" );	
+
+
+
+ 	$( "#dmw" ).dialog({
+      resizable: false,       
+      width: 400,
+      modal: true,
+      title:'Что вы хотите создать',
+      closeText:'Закрыть',
+      dialogClass: 'slideExpandUp object',
+					          						          	  beforeClose:function(event,ui){
+					          	  	// $('#fm_create_razdelov').remove(); 
+      	//$('.ui-dialog').remove();
+       
+        $('#dmw').remove(); 
+
+      },
+
+      buttons: {
+        'Страницу': function() {
+
+	 $( this ).dialog( "close" );
+
+        var dmw = $( '<div"><form method="POST" id="fm_create_razdelov"><textarea name="editor2" id="editor2"></textarea><p>Заголовок</p><input  type="text" name="mu_title" class="name_url" /><input type="text" name="mu_url_title" class="url_title"><p>preview</p><textarea rows="5" cols="45"  name="mu_preview"></textarea>		<input type="hidden" name="insert" value="page"/><input type="hidden" name="mu_ints" value="'+$item.attr('path')+'"/><input type="hidden" name="type_content" value="page"><input type="hidden" name="type_face" value="'+$item.attr('type_face')+'"/><input type="hidden" name="mrd" value="'+$item.attr('mrd')+'"/><input type="hidden" name="position" value="center-menu"></form>		<button action="add" type="page" id="save_razdel">Сохранить</button></div>' ).appendTo( "body" );	
+
+					        setTimeout(function() {
+					          dmw.dialog({
+					          	beforeClose: function( event, ui ) {					          	
+        							$('.ui-dialog').remove();
+        							$('#fm_create_razdelov').closest('div').remove(); 
+					          	},
+					            title: 'title',
+					            width: 950,					           
+					            modal: true
+					          });
+					        }, 1 );
+					      
+		                    setTimeout(function() {
+		                    	//CKEDITOR.replace( 'editor2',{height: '350px' });
+
+							CKEDITOR.replace( 'editor2', {
+							//  filebrowserBrowseUrl :  '/browser/browse.php' , 
+							  height: '350px',
+							   toolbar :"<?php echo $_SESSION['storageUser']['role']?>"
+							});
+
+													
+					        }, 5 );
+
+
+
+
+
+
+
+
+
+
+
+          
+        },
+        'Папку': function() {
+
+	 $( this ).dialog( "close" );
+
+console.log($(this).attr('type'));
+        		var dmw = $( '<div><form action="POST" id="fm_create_razdelov"><p><b>Форма добавления раздела </b></p><p><label for="name">Название раздела</label><Br><input type="text" name="mu_name" class="name_url"><Br><label for="url_title">как будет отображаться ссылка на транслите(можете поправить)</label><Br><input type="text" name="mu_url_title" class="url_title"><Br><input type="hidden" name="insert" value="punct"><input type="hidden" name="type_content" value="'+$item.attr('type')+'"><input type="hidden" name="position" value="'+$item.attr('position')+'"><input type="hidden" name="mu_ints" value="'+$item.attr('path')+'"/><input type="hidden" name="mrd" value="'+$item.attr('mrd')+'"/><input type="hidden" name="type_face" value="'+$item.attr('type_face')+'"/></p></form><button action="add" id="save_razdel">Сохранить</button></div>' ).appendTo( "body" );	
+        			//<input type="checkbox" name="mu_status_chb_rb" id="status" value="1"><label for="status">Показывать данный блок или скрыть</label>
+					        setTimeout(function() {
+					          dmw.dialog({	
+
+					          						          	  beforeClose:function(event,ui){
+					          	  //	 $('#fm_create_razdelov').remove(); 
+      	$('.ui-dialog').remove();       
+        $('#fm_create_razdelov').closest('div').remove(); 
+
+      },
+					            title: 'title',					           
+								width: 500,
+					            modal: true
+					          });
+					        }, 1 ); 
+
+
+
+		
+			
+
+
+
+
+  
+
+          
+        },
+        'Отмена': function() {
+          $( this ).dialog( "close" );
+        }        
+      }
+    });
+
+
+
+ }
+
+
+
+
+
+
+
+
+		//Перетаскивания для создания контента страницы
+		$( "#content_page" ).droppable({
+			activeClass: "",
+			hoverClass: "",
+			accept: "#catalog > div",
+			drop: function( event, ui ) {
+
+
+
+
+				DMW_create_page_fd(ui.draggable);
+
+
+
+
+				
+			}
+		});
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+    // let the trash be droppable, accepting the gallery items
+    $trash.droppable({
+     // accept: "#gallery > li",
+      activeClass: "ui-state-highlight",
+      drop: function( event, ui ) {
+       
+ 		 
+       
+       	
+      	DMW_delet(ui.draggable);
+
+
+
+
+
+
+
+
+
+      }
+    });
+
+
+
+
+
+
+
+
+
+ 
+    // let the gallery be droppable as well, accepting items from the trash
+    $gallery.droppable({
+      accept: "#trash11 li",
+      activeClass: "custom-state-active",
+      drop: function( event, ui ) {
+        recycleImage( ui.draggable );
+      }
+    });
+ 
+    // image deletion function
+ 
+    function deleteImage( $item,$text_alert ) {
+      $item.fadeOut(function() {
+        var $list = $( "ul", $trash ).length ?
+          $( "ul", $trash ) :
+          $( "<ul class='gallery ui-helper-reset'/>" ).appendTo( $trash );
+ 
+
+
+
+
+$qqq = ' <li type="page" id="alert_del" class="ui-widget-content ui-corner-tr"><h5 class="ui-widget-header">'+$text_alert+'</h5></li>';
+
+$( $qqq ).appendTo( "body" );	
+
+
+      
+
+        	$('#alert_del').append( 'Удалено' ).appendTo( $list ).fadeIn(function() {
+         $('#alert_del')
+            .animate({ width: "200px" })
+              .animate({ height: "auto" });
+        });
+      });
+
+        $( '#alert_del' ).remove();
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+    // image recycle function
+    var trash_icon = "<a href='link/to/trash/script/when/we/have/js/off' title='Удалить' class='ui-icon ui-icon-trash'>Удалить</a>";
+    function recycleImage( $item ) {
+      $item.fadeOut(function() {
+        $item
+          .find( "a.ui-icon-refresh" )
+            .remove()
+          .end()
+          .css( "width", "")
+          .append( trash_icon )
+          .find( "imgf" )
+            .css( "height", "72px" )
+          .end()
+          .appendTo( $gallery )
+          .fadeIn();
+      });
+
+    }
+ 
+
+
+
+
+// image preview function, demonstrating the ui.dialog used as a modal window
+    function viewLargerImage( $link ) {
+      var src = $link.attr( "href" ),
+        title = $link.siblings( "h5" ).text(),
+         preview = $link.siblings( "div" ).text(),
+        $modal = $( "img[src$='" + src + "']" );
+
+      if ( $modal.length ) {
+        $modal.dialog( "open" );
+      } else {
+        var img = $( "<div>" + preview + "</div>" )
+          .attr( "src", src ).appendTo( "body" );
+        setTimeout(function() {
+          img.dialog({
+            title: title,
+            width: 400,
+            modal: true
+          });
+        }, 1 );
+      }
+    }
+
+
+
+// image preview function, demonstrating the ui.dialog used as a modal window
+    function editPage( $link ) {
+    	console.log($link);
+      var src = $link.attr( "href" ),
+     	  id_page = $link.attr('data_id'),
+     	  head_prev = '',
+          title = $link.find( "h5" ).text();
+          //preview = $link.siblings( "div" ).text(),
+         // content = $link.siblings( "textarea" ).text();
+         
+
+         	 $.ajax({
+					url: document.location.href,
+					type: 'POST',
+					dataType: 'json',  
+					data: {mu_ints : id_page,epid: true},
+					success: function(datas){
+						// $(e.target).closest("ul").slideToggle();						
+						//console.log(datas);				
+						
+						for (var i in datas) {
+							if(<?php echo $_SESSION['storageUser']['id_rg']?> == 1){
+								head_prev ='<p>Заголовок</p><input  type="text" name="mu_title" value="'+datas[i].title+'" /><p>preview</p><textarea rows="5" cols="45"  name="mu_preview">'+datas[i].preview+'</textarea>';	
+						}
+
+
+
+							var img = $( '<div id="dw_edit_page" class="slideExpandUp object"><form method="POST" id="fm_edit_page"><textarea name="editor2" id="editor2">'+datas[i].content+'</textarea>'+head_prev+'<input type="hidden" name="edit" value="page"/><input type="hidden" name="mu_ints" value="'+id_page+'"/><input style="display:none;" type="submit"></form>		<button type="page" action="update" id="save_razdel">Сохранить</button></div>' ).appendTo( "body" );	
+
+							        setTimeout(function() {
+          img.dialog({
+            title: title,
+            width: 950,            
+            modal: true
+          });
+        }, 1 );
+
+
+                setTimeout(function() {
+
+                //	 CKEDITOR.replace( 'editor2',{height: '400px' });
+
+                	 CKEDITOR.replace( 'editor2', {
+					 // filebrowserBrowseUrl :  '/browser/browse.php' , 
+					  height: '400px',
+					   toolbar : "<?php echo $_SESSION['storageUser']['role']?>"
+
+					});
+
+
+
+
+
+
+
+        }, 5 );
+
+						}
+					}
+			}) 
+ 	
+
+      	 
+
+
+
+
+       
+      
+    }
+
+
+        function infoPage( $link ) {
+      var src = $link.attr( "href" ),
+     	  id_page = $link.siblings( "textarea" ).attr( "data_id" ),
+          title = $link.attr('title'),
+          text = $link.text();
+          
+         
+ 	
+
+      	 var img = $( '<div id="dw_edit_page" class="slideExpandUp object">'+text+'</div>' ).appendTo( "body" );		
+
+        setTimeout(function() {
+          img.dialog({
+            title: title,
+            width: 500,
+            modal: true
+          });
+        }, 1 );
+      
+    }
+
+
+
+ 
+    // resolve the icons behavior with event delegation
+ $('body').on('click','.udhtu-page', function(event){
+    
+      var $item = $( this ),
+        $target = $( event.target );
+ 		
+      if ( $target.is( "a.ui-icon-trash" ) ) {
+      	DMW_delet($item);  
+      	return false;      
+      } else if ( $target.is( "a.ui-icon-zoomin" ) ) {
+        viewLargerImage( $target );
+      } else if ( $target.is( "a.ui-icon-refresh" ) ) {
+        recycleImage( $item );
+      } else if ( $target.is( "a.ui-icon-pencil" ) ) {
+      	editPage( $item );      
+      } else if ( $target.is( "a.ui-icon-clock" ) || $target.is( "a.ui-icon-circle-close" ) || $target.is( "a.ui-icon-circle-check" ) ) {
+      	infoPage( $target );
+      } else if ( $target.is( "a.ui-icon-alert" ) ) {
+      	infoPage( $target );
+      }
+ 
+      //return false;
+    });
+
+
+
+
+
+
+
+
+
+
+
+	});
+	</script>
+
+
+
+	
+</head>
+
+<?php 
+
+					$splits = explode('/',trim($_SERVER['REQUEST_URI'],'/'));
+					list($url_part, $qs_part) = array_pad(explode("?", $_SERVER['REQUEST_URI']), 2, ""); // Разбиваем URL на 2 части: до знака ? и после
+					//$url_part = ($url_part != '/') ? $url_part : '/index/index';
+					$url_part =$url_part;
+					switch ($_SESSION['lang_lk']) {
+						case '1':
+							$activ_lang_ukr = "30px";
+							$language = 1;
+							$lang_header = '/public/img/front/background/nazva_ukr.png';
+							break;
+						case '2':
+							$activ_lang_eng = "30px";
+							$language = 2;
+							$lang_header = '/public/img/front/background/nazva_eng.png';
+							break;
+						case '3':
+							$activ_lang_rus = "30px";
+							$language = 3;
+							$lang_header = '/public/img/front/background/nazva_rus.png';
+							break;
+						
+						default:
+							$language = 1;
+							break;
+					}
+?>
+
+
+ <body>  
+<!--
+<nav id="dr-menu" class="dr-menu">
+    <div class="dr-trigger"><span class="dr-icon dr-icon-menu"></span><a class="dr-label">Account</a></div>
+    <ul>
+        <li><a class="dr-icon dr-icon-user" href="#"><?=$_SESSION['storageUser']['name']?></a></li>      
+        <li><a class="dr-icon dr-icon-heart" href="/mychem/adminka-site-udhtu">Создание контента</a></li>
+          <li><a class="dr-icon dr-icon-camera" href="/mychem/adminka-udhtu-check-in">Проверка контента</a></li>
+        <li><a class="dr-icon dr-icon-lab" href="#">Админка конференции</a></li>
+        <li><a class="dr-icon dr-icon-quill" href="#">НА сайт</a></li>
+        <li><a class="dr-icon dr-icon-settings" href="/mychem/users-admin">Пользовательская админка</a></li>
+        <li><a class="dr-icon dr-icon-switch" href="/logout">Выход</a></li>
+    </ul>
+</nav>
+
+
+
+
+-->
+
+
+<!--
+
+<div id='snav' class='en'>
+
+  <ul>
+
+    <li>
+      <a href='#'>
+        <i class="fa fa-home"></i>
+        <span>Главная</span>
+      </a>
+    </li>
+
+     <li>
+      <a href='#'>
+        <i class="fa fa-css3"></i>
+        <span>CSS3</span>
+      </a>
+    </li>
+
+     <li>
+      <a href='#'>
+        <i class="fa fa-camera"></i>
+        <span>Мои снимки</span>
+      </a>
+    </li>
+
+    <li>
+      <a href='#'>
+        <i class="fa fa-circle-o-notch"></i>
+        <span>Обновления</span>
+      </a>
+    </li> 
+    <li>
+      <a href='#'>
+        <i class="fa fa-envelope"></i>
+        <span>Контакты</span>
+      </a>
+    </li>
+    <li>
+      <a href='#'>
+        <i class="fa fa-music"></i>
+        <span>Музыка</span>
+      </a>
+    </li>
+    <li>
+      <a href='#'>
+        <i class="fa fa-quote-right"></i>
+        <span>Влпросы</span>
+      </a>
+    </li>
+    <li>
+      <a href='#'>
+        <i class="fa fa-rss"></i>
+        <span>RSS</span>
+      </a>
+    </li>
+    <li>
+      <a href='#'>
+        <i class="fa fa-html5"></i>
+        <span>HTML5</span>
+      </a>
+    </li>
+    <li>
+      <a href='#'>
+        <i class="fa fa-video-camera"></i>
+        <span>Видео</span>
+      </a>
+    </li>
+
+  </ul>
+
+</div>
+
+
+-->
+
+
+
+
+	<div id="container">
+
+								
+					
+					   
+
+			<div id="rightMenu">							
+					<?php // include '/module/mychem/src/mychem/form/form_reg_fuel.phtml';?>
+					   
+    	<div class="rmenu" >
+    		<ul >    	
+    			<li><a href="/logout">EXIT</a></li>
+
+    			
+    		</ul>
+    		
+    	</div> 					
+				</div>
+						
+	
+
+
+
+
+		<div id="main">
+			
+				<div id="header">	
+					<div style="float:left;"><img height="150px" src="/public/img/front/background/logo.png">
+					<img height="150px" src="<?=$lang_header?>"></div>
+					<span style="height: 130px;
+background: white;
+width: 3px;
+display: block;
+float: left;
+margin: 10px 10px 10px 0;"></span>
+					<div class="figny">
+					<?php //include  __DIR__.'/top_menu.phtml';?>	
+					<p><a href=" /public/userfiles/file/site_vimogi.pdf">Вимоги до змісту</a></p>
+    				<p><a href="/public/userfiles/file/site_instr.pdf">Інструкція</a></p>				
+					</div>
+					<div id="lang">
+												<p><a  href="http://udhtu.com.ua/mychem/cpanel/udhtu-folder/?l=1"><img style="height:<?=$activ_lang_ukr?>" src="/public/img/global/icon/ukr.png" ></a>
+												<a href="http://udhtu.com.ua/mychem/cpanel/udhtu-folder/?l=2"><img style="height:<?=$activ_lang_eng?>" src="/public/img/global/icon/eng.png"></a>
+												<a href="http://udhtu.com.ua/mychem/cpanel/udhtu-folder/?l=3"><img style="height:<?=$activ_lang_rus?>" src="/public/img/global/icon/rus.png"></a></p>
+										</div>
+
+				</div>		
+
+
+
+			<div id="right-menu">						
+					
+					<?php include  __DIR__.'/right_menu.phtml';?>		
+			</div>
+			<div id="center-punct" class="pullDown" >						
+			
+						
+			</div>	
+				<div id="content">	<?=$content?>  </div> <!-- /content -->
+			</div>			
+
+			<div id="footer">				
+
+			</div> <!-- /end footer -->			
+		</div>
+	</div>
+	</body>
+
+
+    <script>
+
+        var croppicContainerOptions = {
+               uploadUrl:location.href,
+                 //dataType: 'json',
+               cropUrl:location.href,
+               cropData:{
+                  "crop":1                
+                },
+                uploadData:{
+                  "upd":1                   
+                },                
+               modal:false,
+               doubleZoomControls:false,               
+               rotateControls: false,            
+               loaderHtml:'<div class="loader bubblingG"><span id="bubblingG_1"></span><span id="bubblingG_2"></span><span id="bubblingG_3"></span></div> ',
+                onBeforeImgUpload: function(){ console.log('onBeforeImgUpload') },
+                onAfterImgUpload: function(){ console.log('onAfterImgUpload') },
+                onImgDrag: function(){ console.log('onImgDrag') },
+                onImgZoom: function(){ console.log('onImgZoom') },
+                onBeforeImgCrop: function(){ console.log('onBeforeImgCrop') },
+                onAfterImgCrop:function(){ console.log('onAfterImgCrop') },
+                onReset:function(){ console.log('onReset') },
+                onError:function(errormessage){ console.log('onError:'+errormessage) }
+        }
+        
+        var cropContainer = new Croppic('cropContainer', croppicContainerOptions);
+       
+        
+    </script>
+
+
+
+
+
+
+
+
+
+
+
+	
+	<script type="text/javascript">
+
+
+		function DMW_delet($item ) {
+
+var data_id,type,text_alert;
+
+switch($item.attr( "type" )){
+	case 'block':		 
+		 		type 		= $item.attr( "type" );
+				data_id 	= $item.attr( "data_id" );
+				text_alert 	= $item.find("span").text();
+		 break;
+	case 'punct':
+				type 		= $item.attr( "type" );
+				data_id 	= $item.attr( "data_id" );
+				text_alert 	= $item.find("a").text();
+			
+		 break;
+	case 'center_punct':
+				type 		= $item.attr( "type" );
+				data_id 	= $item.attr( "data_id" );
+				text_alert 	= $item.find("a").text();
+						
+		break;
+	case 'page':
+
+				type 		= $item.attr( "type" );
+				path 		= $item.attr( "path" );
+				path = path.split('/');	
+				id_mtt = path.pop();			
+				data_id 	= $item.attr( "data_id" );
+				text_alert 	= $item.find("h5").text();	
+		 break;
+	case 'folder':
+
+				type 		= $item.attr( "type" );				
+				data_id 	= $item.attr( "data_id" );
+				text_alert 	= $item.find("a").text();	
+		 break;
+		case 'subfolder':
+
+				type 		= $item.attr( "type" );
+				path 		= $item.attr( "path" );
+				path = path.split('/');	
+				id_mtt = path.pop();
+				path 		= $item.attr( "path" );							
+				data_id 	= $item.attr( "data_id" );
+				text_alert 	= $item.find("a").text();	
+		break;
+	default:
+					
+		 break;
+}
+
+$( '<div id="dmw"  class="ui-state-error-text"><p><span class="ui-icon  ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span><span style="color:black;">ВЫ хотите удалить:</span><br> '+text_alert+'</p></div>' ).appendTo( "body" );	
+
+//console.log(data_id);
+
+ 	$( "#dmw" ).dialog({
+      resizable: false,       
+      width: 400,
+      modal: true,
+      title:'Хотите удалить',
+      closeText:'Закрыть',
+      dialogClass: 'slideExpandUp object',
+      beforeClose:function(event,ui){
+      	 $( this ).remove();
+      },
+      buttons: {
+        'Удалить': function() {
+        	if (!id_mtt) {
+        		  $( this ).dialog( "close" );
+        		  return 0;
+        	};    
+			$.ajax({
+				url: document.location.href,
+				type: 'POST',
+				dataType: 'json',  
+				data: {data_id : data_id,delet : type,id_mtt : id_mtt, path : path },
+				success: function(datas){		
+						
+					
+						location.href =document.location.href;
+
+				}
+			});
+
+          $( this ).dialog( "close" );
+          // deleteImage( $item,text_alert );
+          
+        },
+        'Отмена': function() {
+          $( this ).dialog( "close" );
+        }        
+      }
+    });
+
+
+
+ }
+
+
+
+
+	</script>
+</html>

@@ -1,0 +1,43 @@
+<?php 
+
+	if($blockRightMenu){
+		//var_dump($blockLeftMenu);
+		foreach ($blockRightMenu as $key => $value1) {
+			echo "<div data_id=".$value1['id']." type='block' class='cart cssmenu l_menu  stretchLeft object'>";
+			echo "<li class='block_menu has-sub block_sub '  style='background: url(/public/img/front/menu_img/block".$value1['porydok'].".gif) no-repeat'><a class='portlet-header '   href='#'><span>".$value1['block']."</span></a><img class='pulse' src='/public/img/front/background/logo.png'><div style='margin:10px'>Торги по доллару закрылись в диапазоне 15,2800-15,5850 грн/$</div><ul  >";
+				if($punctMenu0){
+					foreach ($punctMenu0 as $key => $value) {
+						if($value['mu_block'] == $value1['id']){							
+							if($value['url'] === "#" ){
+								echo "<li  type='punct' class='punct_menu_lvl_0 has-sub punct_sub ' data_id='".$value['id']."'><a href='".$value['url']."'>".$value['punct']."</a>";
+								/*	if($punctMenu1){
+									foreach ($punctMenu1 as $key => $value2) {
+										if($value['id'] == $value2['parents_punct']){
+								echo "<ul> <li><a href='".$value['url']."'><span>".$value2['punct']."</span></a></li>";
+							
+
+							}
+								
+							}
+							echo "</ul></li>";
+						} */
+							}else{
+								$url_value  = '';
+								if ($value['call_url_value']){
+									//$url_value = "/".$value['call_url_value'];	
+									$url_value = "/all";
+								}else{
+									$url_value = "/all";	
+								}
+							echo "<li type='punct' class='punct_menu_lvl_0' data_id='".$value['id']."'><a href='/mychem/adminka-site-udhtu/".$value['id'].$url_value."'>".$value['punct']."</a></li>";
+						}
+						}
+
+					}			
+				}
+
+			echo "</ul></li></div>";
+		}
+
+}
+		?>

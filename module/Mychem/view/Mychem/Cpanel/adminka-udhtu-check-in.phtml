@@ -1,0 +1,165 @@
+
+
+<!--
+ 
+  <div id="catalog">
+  		<div type_block="section" style="cursor: pointer;margin-left: 270px;">Ссылка ВСЕМОГУЩАЯ!</div>
+  </div>
+
+
+
+
+
+
+<div  class="ui-widget ui-helper-clearfix">
+ 
+<ul id="gallery" class="gallery ui-helper-reset ui-helper-clearfix">
+  <li class="ui-widget-content ui-corner-tr">
+    <h5 class="ui-widget-header">High Tatras</h5>
+   
+    <a href="images/high_tatras.jpg" title="View larger image" class="ui-icon ui-icon-zoomin">View larger</a>
+    <a href="link/to/trash/script/when/we/have/js/off" title="Delete this image" class="ui-icon ui-icon-trash">Delete image</a>
+  </li>
+  <li class="ui-widget-content ui-corner-tr">
+    <h5 class="ui-widget-header">High Tatras 2</h5>
+   
+    <a href="images/high_tatras2.jpg" title="View larger image" class="ui-icon ui-icon-zoomin">View larger</a>
+    <a href="link/to/trash/script/when/we/have/js/off" title="Delete this image" class="ui-icon ui-icon-trash">Delete image</a>
+  </li>
+  <li class="ui-widget-content ui-corner-tr">
+    <h5 class="ui-widget-header">High Tatras 3</h5>
+   
+    <a href="images/high_tatras3.jpg" title="View larger image" class="ui-icon ui-icon-zoomin">View larger</a>
+    <a href="link/to/trash/script/when/we/have/js/off" title="Delete this image" class="ui-icon ui-icon-trash">Delete image</a>
+  </li>
+  <li class="ui-widget-content ui-corner-tr">
+    <h5 class="ui-widget-header">High Tatras 4</h5>
+   
+    <a href="images/high_tatras4.jpg" title="View larger image" class="ui-icon ui-icon-zoomin">View larger</a>
+    <a href="link/to/trash/script/when/we/have/js/off" title="Delete this image" class="ui-icon ui-icon-trash">Delete image</a>
+  </li>
+</ul></div>
+
+
+ 
+
+
+
+
+
+<div id="dw_create_page" class="slideExpandUp object">
+	<form method="POST" id="fm_create_razdelov">
+		<textarea name="editor" id="editor"></textarea>
+		<script type="text/javascript">
+		CKEDITOR.replace( 'editor');
+		</script>
+
+		<p>Заголовок</p>
+		<input  type="text" name="mu_title" ></input>
+		<p>preview</p>
+		<textarea  name="mu_preview" ></textarea>
+
+		<input type="hidden" name="insert" value="page">
+		<input type="hidden" name="mu_ints" value="<?=$params_last_key?>">
+		
+
+	</form>
+		<button id="save_razdel">Сохранить</button>
+		<div class="window_close">X</div>
+</div>
+
+ -->
+
+
+    <div id="block_switcher">
+        <a type="new_page">Новые страницы</a>
+        
+        <a type="update_page" >Обновленные страницы</a>
+      </div>
+
+
+
+
+
+
+
+
+
+
+
+
+<?php 
+echo $write_div;
+echo $delet_div;
+echo $update_div;
+
+
+if ($content) {
+
+
+
+echo '<div id="content_page" ><div type="page" class="ui-widget ui-helper-clearfix"><ul id="gallery" class="gallery ui-helper-reset ui-helper-clearfix">';
+
+foreach ($content as $key => $value):
+	switch ($value['mu_status_check']) {
+    case '3':
+         
+          $arr_status = array(
+                              'status_page' => 'Ожидает проверки',
+                              'icon' => 'ui-icon ui-icon-clock',
+                              'text' => 'Данный статус ознаечает, что ВАША старница находится в стадии ожидания проверки, следите за изменением статуса и информации о страницы в нем!!',
+                             );
+
+      break;
+
+    case '7':
+         
+          $arr_status = array(
+                              'status_page' => 'Треба доробити',
+                              'icon' => 'ui-icon ui-icon-alert',
+                              'text' => $value['notification'],
+                             );
+
+      break;  
+    case '5':
+         
+          $arr_status = array(
+                              'status_page' => 'Відхилено',
+                              'icon' => 'ui-icon  ui-icon-circle-close',
+                              'text' => $value['notification'],
+                             );
+
+      break;      
+    
+    default:
+      $arr_status = array();
+      break;
+  }
+?>
+
+ <li type='page' class="ui-widget-content ui-corner-tr">
+    <h5 class="ui-widget-header"><?=$value['title']?></h5>
+   	<div><?=$value['preview']?></div>
+    <a  title="Подробнее" class="ui-icon ui-icon-zoomin">Подробнее</a>
+    <a  title="Редактироват" class="ui-icon ui-icon-pencil">Редактироват</a>
+     <a data="info" title="<?=$arr_status['status_page']?>" class="<?=$arr_status['icon']?>"><?=$arr_status['text']?></a>
+    <a href="link/to/trash/script/when/we/have/js/off" title="Удалить" class="ui-icon ui-icon-trash">Удалить</a>
+    <textarea data_id="<?=$value['id']?>" style="display:none"><?=$value['content']?></textarea>  
+     
+  </li>
+
+
+<?php
+ENDFOREACH;
+echo "</ul></div></div>";
+}else{
+
+echo '<div id="content_page" ><div type="page" class="ui-widget ui-helper-clearfix">';
+
+  echo "</div></div>";
+}
+?>
+
+
+
+

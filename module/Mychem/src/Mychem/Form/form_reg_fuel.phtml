@@ -1,0 +1,85 @@
+<div id="mu_reg_lang">
+	<button  class="button_lang">
+		<img width="30px" height="30px" src="/public/img/mychem/conference/form/ukr.jpg" alt="ukr" >
+	</button>
+	<button class="button_lang">
+		<img width="30px" height="30px" src="/public/img/mychem/conference/form/rus.jpg" alt="rus">
+	</button>
+	<button class="button_lang">
+		<img width="30px" height="30px" src="/public/img/mychem/conference/form/eng.jpg" alt="eng" >
+	</button>	
+
+</div>
+<img style="float:right;" src="/public/img/mychem/conference/registred.png">
+<div id="mu_registred">
+	<form action="conference" method="post" id="mu_conf_reg"> 
+		<?php  echo "<h2 style='color:red'>".$_COOKIE['err_reg']."</h2>"; ?>
+		<hr>
+		<div id="mu_organization">
+			<label >Назва організації</label>
+			<input class="form_field" type="text" name="mu_organization" value="">
+		</div>
+		<div id="mu_degree">
+			<label >Посада</label>
+			<select class="form_field_select"  name="mu_degree">		
+				<option selected disabled data="option_degree_0" value=0 >Зробіть вибір...</option>
+					<?php foreach($degree as $key => $value):
+						echo '<option data="option_degree_'.$value['id'].'" value="'.$value['id'].'">'.$value['value'].'</option>';			
+					ENDFOREACH?>
+			</select></div>	
+		<div id="mu_uch_stepen">
+			<label >Науковий ступінь, звання</label>
+			<select class="form_field_select"  name="mu_uch_stepen">		
+			<option selected disabled data="option_uch_stepen_0" value=0  >Зробіть вибір...</option>
+					<?php foreach($uch_stepen as $key => $value):
+						echo '<option data="option_uch_stepen_'.$value['id'].'" value="'.$value['id'].'">'.$value['value'].'</option>';	
+					ENDFOREACH?>
+		</select>
+		</div>		
+		<div id="mu_topic_conf">
+			<label >Тематичні напрямки</label>
+			<select class="form_field_select"  name="mu_topic_conf">
+				<option selected disabled  data="option_topic_conf_0" value="0" >Зробіть вибір...</option>
+					<?php foreach($topic_conf as $key => $value):
+						echo '<option data="option_topic_conf_'.$value['id'].'" value="'.$value['id'].'">'.$value['value'].'</option>';		
+					ENDFOREACH?>
+			</select>
+		</div>
+		<div id="mu_type_presentation">
+			<label >Форма доповіді</label>
+			<select class="form_field_select"  name="mu_type_presentation">		
+				<option selected disabled data="option_type_presentation_0" value="0" >Зробіть вибір...</option>
+					<?php foreach($type_presentation as $key => $value):
+						echo '<option data="option_type_presentation_'.$value['id'].'" value="'.$value['id'].'">'.$value['value'].'</option>';		
+					ENDFOREACH?>
+			</select></div>	
+		<div id="mu_title_public">
+			<label >Назва доповіді</label>
+			<input class="form_field" type="text" name="mu_title_public" value="">
+		</div>
+		<div id="mu_abstracts">		
+			<label >Анотація (200 слів)</label>
+			<textarea  id="text_area" rows="3" class="form_field" cols="45" name="mu_abstracts"></textarea>
+		</div>		
+		<div  id="mu_party">
+			<label>Участь у фуршеті – 23 травня</label>
+			<input class="form_field_che" type="checkbox" name="mu_party" value="1">
+		</div>  
+		<div id="mu_training_courses">
+			<label >Курси підвищення кваліфікації</label>
+			<input class="form_field_che" type="checkbox" name="mu_training_courses" value="1">
+			<p><input type="hidden" name="conf" value="1"></p>
+		</div>	
+		<?php //<div><label>Потрібность у готелі</label><input class="form_field" type="checkbox" name="mu_hotel" value="1"></div> ?><div style="margin:25px 0 0 0">
+		<center>
+			<p><input id="button_reg_conf" type="submit" value="Подати заявку на участь"></p>			
+		</center>
+	</div>
+	</form>	
+	<?php
+	//<div style="margin:25px 0 0 0">
+	//	<center>
+	//		<button id="button_reg_conf">&nbsp;Зареєструватися&nbsp;</button>
+	//	</center>
+	//</div> ?>	
+</div>

@@ -1,0 +1,139 @@
+
+
+<center><div id="title_conf3" style="color:navy">Для реєстрації введіть дані</div></center>
+<div id="mu_reg_lang">
+	<button  class="button_lang">
+		<img src="/public/img/global/icon/ukr.png" height="30px" alt="ukr" >
+	</button>
+	<button class="button_lang">
+		<img src="/public/img/global/icon/rus.png" height="30px" alt="rus">
+	</button>
+	<button class="button_lang">
+		<img src="/public/img/global/icon/eng.png" height="30px" alt="eng" >
+	</button>
+
+</div>
+<div id="mu_registred">
+	<form action="" method="post" id="mu_conf_reg"> 
+		<div id="mu_last_name">
+			<label   >Прізвище</label>
+			<input class="form_field" type="text" name="mu_last_name" value="">
+		</div>
+		<div id="mu_name">
+			<label >Ім'я</label>
+			<input class="form_field" type="text" name="mu_name" value="">
+		</div>		
+		<div  id="mu_middle_name">
+			<label>По батькові</label>
+			<input class="form_field" type="text" name="mu_middle_name" value="">
+		</div>
+		<div id="mu_sex">
+			<label >Стать</label>			
+				<input type="radio" style="margin-right:60px;" name="mu_sex" checked value="М"><img src="/public/img/global/icon/sex_man.png" alt="eng">
+				<input type="radio" style="margin-right:20px;" name="mu_sex" value="Ж"><img src="/public/img/global/icon/sex_woman.png" alt="eng" >			
+		</div>
+	<?php /*	<div id="mu_mob_phone">
+			<label for="tel" >Телефон</label>
+			<img class="title_reg_field" data="title_mob_phone" title='Номер телефону може містити лише знак "+" <br> та цифри після нього.' src="/public/img/global/icon/info_norm.png">
+			
+			<input class="form_field" style="margin:0;" id="tel" type="tel" name="mu_tel" value="">
+		</div> 
+		<div  id="mu_skype">
+			<label>Країна, населений пункт</label>
+			<input class="form_field" type="text" name="mu_skype" value="">
+		</div>  
+	*/?>
+		<div id="mu_mail">
+			<label >e-mail</label>
+			<input class="form_field" type="email" name="mu_mail" value="">
+		</div>
+		<div id="mu_login">
+			<label >Логін</label>
+			<img class="title_reg_field" data="title_login" title='Логін має містити не менше 5 латинських літер та цифр. <br> З інших знаків допускається лише знак "_".' src="/public/img/global/icon/info_norm.png">
+			
+			<input class="form_field" style="margin:0;" type="text" name="mu_login" autocomplete="off">
+		</div>
+		<div id="mu_password">
+			<label >Пароль</label>
+			<img class="title_reg_field" data="title_password" title='Пароль має містити не менше 7 латинських літер та цифр.<br> З інших знаків допускається лише знак "_".' src="/public/img/global/icon/info_norm.png">
+		
+			<input class="form_field" style="margin:0;" type="password" autocomplete="off" name="mu_password">
+		</div>
+		<div id="mu_password2">
+			<label >Пароль ще раз</label>
+			<input class="form_field" type="password" name="mu_password2" autocomplete="off">
+		</div>
+		<div id="muu_captcha">
+			<div id="mu_capch" ><?=$captcha?>=&nbsp;</div>
+			<label ></label>
+			<div id="mu_captcha"><img class="title_reg_field" data="title_captcha" title='Перше правило математики.' src="/public/img/global/icon/info_norm.png"></div>
+			<input class="form_field" style="margin:0;" type="text" name="mu_captcha" value="">
+		</div>	
+		<hr>
+		<?php /*
+		<div id="mu_organization">
+			<label >Назва організації</label>
+			<input class="form_field" type="text" name="mu_organization" value="">
+		</div>
+		<div id="mu_degree">
+			<label >Посада</label>
+			<select class="form_field_select"  name="mu_degree">		
+				<option selected disabled data="option_degree_0" value=0 >Зробіть вибір...</option>
+					<?php foreach($degree as $key => $value):
+						echo '<option data="option_degree_'.$key.'" value="'.$key.'">'.$value.'</option>';			
+					ENDFOREACH?>
+			</select></div>	
+		<div id="mu_uch_stepen">
+			<label >Науковий ступінь, звання</label>
+			<select class="form_field_select"  name="mu_uch_stepen">		
+			<option selected disabled data="option_uch_stepen_0" value=0  >Зробіть вибір...</option>
+					<?php foreach($uch_stepen as $key => $value):
+						echo '<option data="option_uch_stepen_'.$key.'" value="'.$key.'">'.$value.'</option>';			
+					ENDFOREACH?>
+		</select>
+		</div>		
+		<div id="mu_topic_conf">
+			<label >Тематичні напрямки</label>
+			<select class="form_field_select"  name="mu_topic_conf">
+				<option selected disabled  data="option_topic_conf_0" value="0" >Зробіть вибір...</option>
+					<?php foreach($topic_conf as $key => $value):
+						echo '<option data="option_topic_conf_'.$key.'" value="'.$key.'">'.($value).'</option>';			
+					ENDFOREACH?>
+			</select>
+		</div>
+		<div id="mu_type_presentation">
+			<label >Форма доповіді</label>
+			<select class="form_field_select"  name="mu_type_presentation">		
+				<option selected disabled data="option_type_presentation_0" value="0" >Зробіть вибір...</option>
+					<?php foreach($type_presentation as $key => $value):
+						echo '<option data="option_type_presentation_'.$key.'" value="'.$key.'">'.$value.'</option>';			
+					ENDFOREACH?>
+			</select></div>	
+		<div id="mu_title_public">
+			<label >Назва доповіді</label>
+			<input class="form_field" type="text" name="mu_title_public" value="">
+		</div>
+		<div id="mu_abstracts">		
+			<label >Анотація (200 слів)</label>
+			<textarea  id="text_area" rows="3" class="form_field" cols="45" name="mu_abstracts"></textarea>
+		</div>		
+		<div  id="mu_party">
+			<label>Участь у фуршеті – 23 травня</label>
+			<input class="form_field_che" type="checkbox" name="mu_party" value="1">
+		</div>  
+		<div id="mu_training_courses">
+			<label >Курси підвищення кваліфікації</label>
+			<input class="form_field_che" type="checkbox" name="mu_training_courses" value="1">
+		</div>	
+		<?php //<div><label>Потрібность у готелі</label><input class="form_field" type="checkbox" name="mu_hotel" value="1"></div> ?>			
+	*/?>
+
+	</form>
+	<div style="margin:25px 0 0 0">
+
+		
+		<center>
+			<button id="button_reg_conf">&nbsp;Зареєструватися&nbsp;</button>
+		</center>
+	</div>
+</div>

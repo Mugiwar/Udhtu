@@ -1,0 +1,51 @@
+<?php
+if($recov){ ?>
+
+
+<div id="mu_registred">
+<div class="autForm">
+	<div class="errorAuth"><?=$errorAuth?></div>
+	<form method="POST" name="form_reset_pass">
+			<div id="mu_password">
+			<label >Пароль</label>
+			<img class="title_reg_field" data="title_password" title='Пароль має містити не менше 7 латинських літер та цифр.<br> З інших знаків допускається лише знак "_".' src="/public/img/global/icon/info_norm.png">
+		
+			<input class="form_field" style="margin:0;" type="password" autocomplete="off" name="mu_password">
+		</div>
+		<div id="mu_password2">
+			<label >Пароль ще раз</label>
+			<input class="form_field" type="password" name="mu_password2" autocomplete="off">
+		</div>
+		<input type="hidden" name="mu_rest_pass" value=<?=$recov ?>>
+		<br>	
+		<center><p><input class="btnLogin" type="submit" value=" Змінити "></p></center>
+	</form>	
+</div></div>
+<img style="float:right;" src="/public/img/front/enter.png">
+
+<?php }
+
+
+
+?>
+
+
+<?php
+if(!($recov)){ ?>
+
+<div class="autForm">
+	<div class="errorAuth"><?=$errorAuth?></div>
+	<form method="POST" name="form_reset_pass" >
+		<p><label for="login">Введіть Ваш e-mail</label></p>
+		<p><input class="formField" type="text" name="mu_mail" id="login"></p>	
+		<input type="hidden" name="mu_rest_pass" value="1">	
+		<center><p><input class="btnLogin" type="submit" value=" Надіслати "></p></center>
+	</form>	
+</div>
+<img style="float:right;" src="/public/img/front/enter.png">
+
+<?php }
+
+
+
+?>

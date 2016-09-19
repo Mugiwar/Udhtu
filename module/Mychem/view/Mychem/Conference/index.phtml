@@ -1,0 +1,664 @@
+				<?php 	
+				
+
+
+					if(($content) || ($params['registration'] == 'done')){
+					foreach ($content as $key => $value) {
+						foreach ($value as $key => $value) {
+							$content[$key] = $value;
+							
+						}
+					}
+				   // var_dump($degree);
+				   // echo __DIR__;
+				   // echo $json;
+					//echo  $error;
+					if(($params['registration'] == 'done')){
+							echo "<center><div style='font-size:18px;font-weight:bold;color:green;'>Ваша заявка на участь подана. Ближайшим часом вона буде розглянута та одобрена.<br> Про це Вас проінформують по електронній адресі.</div></center>";
+							echo "<a href='http://udhtu.waterh.net/mychem/index/conference/partaker/tnr_2015'>Повернутися на головну</a>";
+						 
+
+					}
+
+
+
+
+
+
+					if($content){
+					echo  $content['content'] ;
+				   // echo "<h2 style='color:red'>".$_COOKIE['Test']."</h2>";
+				   // print_r(json_decode($_COOKIE['Test']));
+					//var_dump($err);
+					switch ($content['assoc_language']) {
+						case 'registration/fuel':                        
+							include '/home6/waterhne/public_html/udhtu/module/Mychem/src/Mychem/Form/form_reg_fuel.phtml'; 
+							include '/module/Mychem/src/Mychem/Form/form_reg_fuel.phtml' ;
+						   
+							//echo  $content['content'] ;
+							break;
+						case 'registration/himsovrtehn':
+							include '/home6/waterhne/public_html/udhtu/module/Mychem/src/Mychem/Form/form_reg_himsovrtehn.phtml'; 
+							include '/module/Mychem/src/Mychem/Form/form_reg_himsovrtehn.phtml' ;
+							
+							
+							break;
+						case 'registration/shevchenko':
+							include '/home6/waterhne/public_html/udhtu/module/Mychem/src/Mychem/Form/form_reg_shevchenko.phtml'; 
+							include '/module/Mychem/src/Mychem/Form/form_reg_shevchenko.phtml' ;
+							
+							
+							break;
+						case 'registration/himsovrtehn_85year':
+							include '/home6/waterhne/public_html/udhtu/module/Mychem/src/Mychem/Form/form_reg_himsovrtehn_85year.phtml'; 
+							include '/module/Mychem/src/Mychem/Form/form_reg_himsovrtehn_85year.phtml' ;
+							break;
+						case 'registration/tnr_2015':
+							include '/home6/waterhne/public_html/udhtu/module/Mychem/src/Mychem/Form/form_reg_tnr_2015.phtml'; 
+							include '/module/Mychem/src/Mychem/Form/form_reg_tnr_2015.phtml' ;
+							break;
+
+						case 'partaker/fuel':
+						   ?>
+ 			<div class="sort_conf">
+						 	<div id="type_section">Зробіть вибір секції:</div>
+			<div class="sort_type">
+				<?php foreach ($topic_conf as $key => $value): ?>
+				<div idTopic=<?=$value['id'];?> ><?=$value['value'];?></div>
+				<?php ENDFOREACH;?>
+			</div></div> 
+			
+
+
+
+					   <table class="full_sort" border="1" style="margin: 0 15px 35px ;width:950px">
+	<tr>
+		<th>№</th>
+		<th>П.І.Б.</th>
+		<th>Назва роботи</th>
+		<th>Статус роботи</th>
+		<th>Оплата участі</th>	   
+	</tr>
+<?php 
+
+
+//var_dump($partakerInfo);
+
+
+foreach ($partakerInfo as $key => $value):
+?>
+
+	<tr >
+		<td><?php echo $cnt+=1;  ?></td>
+		<td width="220"><?php echo $value['last_name'].'<br> '.$value['name'].' '.$value['middle_name'] ?></td>
+		<td data="title_public"><?php echo $value['title_public'] ?></td>
+	   <td>
+			<?php 
+			switch($value['mu_status']){
+			case 1: echo '<center><img class="paulund_modal" status="'.$value['mu_status'].'" id_conf="'.$value['id'].'" style="height:40px;" src="/public/img/mychem/conference/prinyto.png"></center>';
+				break;
+			case 2: echo '<center><img class="paulund_modal" status="'.$value['mu_status'].'" id_conf="'.$value['id'].'" style="height:40px;" src="/public/img/mychem/conference/ne_polucheno.png"></center>';
+				break;
+			case 3: echo '<center><img class="paulund_modal" status="'.$value['mu_status'].'" id_conf="'.$value['id'].'" style="height:40px;" src="/public/img/mychem/conference/na_proverke.png"></center>';
+				break;
+			case 4: echo '<center><img class="paulund_modal" status="'.$value['mu_status'].'" id_conf="'.$value['id'].'" style="height:40px;" src="/public/img/mychem/conference/provereno.png"></center>';
+				break;
+			case 5: echo '<center><img class="paulund_modal" status="'.$value['mu_status'].'" id_conf="'.$value['id'].'" style="height:40px;" src="/public/img/mychem/conference/ne_prinyto.png"></center>';
+				break;
+
+			}
+		 
+		   ?> 		   
+	   </td>
+   <td>
+		<?php if($value['mu_status_oplata'] == 1)
+		 echo '<center><img style="height:40px;" src="/public/img/mychem/conference/plus.png"></center>';
+		 else
+		 echo '<center><img style="height:40px;" src="/public/img/mychem/conference/minus.png"></center>';
+		   ?> 
+	</td>     
+
+	</tr>   
+
+
+
+<?php ENDFOREACH; ?>
+</table>
+							
+							
+						 <?php
+							
+							break;
+
+
+
+
+
+
+						case 'partaker/shevchenko':
+
+						   ?>
+ 			<div class="sort_conf">
+						 	<div id="type_section">Зробіть вибір секції:</div>
+			<div class="sort_type">
+				<?php foreach ($topic_conf as $key => $value): ?>
+				<div idTopic=<?=$value['id'];?> ><?=$value['value'];?></div>
+				<?php ENDFOREACH;?>
+			</div></div> 
+			
+
+
+
+					   <table class="full_sort" border="1" style="margin: 0 15px 35px ;width:950px">
+	<tr>
+		<th>№</th>
+		<th>П.І.Б.</th>
+		<th>Назва роботи</th>
+		<th>Статус роботи</th>
+		<th>Оплата участі</th>	   
+	</tr>
+<?php 
+
+
+//var_dump($partakerInfo);
+
+
+foreach ($partakerInfo as $key => $value):
+?>
+
+	<tr >
+		<td><?php echo $cnt+=1;  ?></td>
+		<td width="220"><?php echo $value['last_name'].'<br> '.$value['name'].' '.$value['middle_name'] ?></td>
+		<td data="title_public"><?php echo $value['title_public'] ?></td>
+	   <td>
+			<?php 
+			switch($value['mu_status']){
+			case 1: echo '<center><img class="paulund_modal" status="'.$value['mu_status'].'" id_conf="'.$value['id'].'" style="height:40px;" src="/public/img/mychem/conference/prinyto.png"></center>';
+				break;
+			case 2: echo '<center><img class="paulund_modal" status="'.$value['mu_status'].'" id_conf="'.$value['id'].'" style="height:40px;" src="/public/img/mychem/conference/ne_polucheno.png"></center>';
+				break;
+			case 3: echo '<center><img class="paulund_modal" status="'.$value['mu_status'].'" id_conf="'.$value['id'].'" style="height:40px;" src="/public/img/mychem/conference/na_proverke.png"></center>';
+				break;
+			case 4: echo '<center><img class="paulund_modal" status="'.$value['mu_status'].'" id_conf="'.$value['id'].'" style="height:40px;" src="/public/img/mychem/conference/provereno.png"></center>';
+				break;
+			case 5: echo '<center><img class="paulund_modal" status="'.$value['mu_status'].'" id_conf="'.$value['id'].'" style="height:40px;" src="/public/img/mychem/conference/ne_prinyto.png"></center>';
+				break;
+
+			}
+		 
+		   ?> 		   
+	   </td>
+   <td>
+		<?php if($value['mu_status_oplata'] == 1)
+		 echo '<center><img style="height:40px;" src="/public/img/mychem/conference/plus.png"></center>';
+		 else
+		 echo '<center><img style="height:40px;" src="/public/img/mychem/conference/minus.png"></center>';
+		   ?> 
+	</td>     
+
+	</tr>   
+
+
+
+<?php ENDFOREACH; ?>
+</table>
+							
+							
+						 <?php
+							
+							break;
+
+
+
+
+
+
+
+
+
+
+
+						case 'partaker/himsovrtehn_85year':
+
+						   ?>
+						   <hr>						  
+						    <b> Для відправки тез зробіть вибір секції, знайдіть свою роботу та натисніть на "cтатус роботи"</b>
+						   	<table>
+
+						   		<tr>
+									<td><img   style="height:20px;" src="/public/img/mychem/conference/ne_polucheno.png">	– тези НЕ ОТРИМАНО. Терміново надішліть їх!!!&nbsp;&nbsp;&nbsp;</td>
+									<td><img  style="height:20px;" src="/public/img/mychem/conference/na_proverke.png">	– тези знаходяться на перевірці</td>		
+								</tr>
+								<tr>
+									<td><img   style="height:20px;" src="/public/img/mychem/conference/provereno.png"> – тези повернуто для доопрацювання</td>
+									<td><img   style="height:20px;" src="/public/img/mychem/conference/ne_prinyto.png"> – нажаль тези відхилено</td>		
+								</tr>
+								 <tr>
+									<td><img   style="height:20px;" src="/public/img/mychem/conference/prinyto.png"> – тези прийнято</td>
+									
+								</tr>
+
+							</table>
+							<hr>
+							
+							<div>
+								<b>Сплату оргвнеску Ви можете зробити двома шляхами:</b><br>
+								1) на р/р <span style="color:rgba(0, 0, 8, 0.5)">(Реквізити: ЕДПОУ (ОКПО) 02070758, р/р 31251202114426, МФО 805012 банк ГУДКСУ у Дніпропетровській обл. м.Дніпроптеровськ
+											Найменування платежу: оргвнесок на конференцію «Хімія та сучасні технології», прізвище, ім’я учасника)</span><br>
+								2) сплатити рахунок, який надійде на Вашу електроннну адресу (<b style="color:blue">без комісії</b>)
+
+							</div>
+							
+							<hr>
+ 			<div class="sort_conf">
+						 	<div id="type_section">Зробіть вибір секції:</div>
+			<div class="sort_type">
+				<?php foreach ($topic_conf as $key => $value): ?>
+				<div idTopic=<?=$value['id'];?> ><?=$value['value'];?></div>
+				<?php ENDFOREACH;?>
+			</div></div> 
+			
+
+
+
+					   <table class="full_sort" border="1" style="margin: 0 15px 35px ;width:950px">
+	<tr>
+		<th>№</th>
+		<th>П.І.Б.</th>
+		<th>Назва роботи</th>
+		<th>Статус роботи</th>
+		<th>Оплата участі</th>	   
+	</tr>
+<?php 
+
+
+//var_dump($partakerInfo);
+
+
+foreach ($partakerInfo as $key => $value):
+?>
+
+	<tr >
+		<td><?php echo $cnt+=1;  ?></td>
+		<td width="220"><?php echo $value['last_name'].'<br> '.$value['name'].' '.$value['middle_name'] ?></td>
+		<td data="title_public"><?php echo $value['title_public'] ?></td>
+	   <td>
+			<?php 
+			switch($value['mu_status']){
+			case 1: echo '<center><img class="paulund_modal" status="'.$value['mu_status'].'" id_conf="'.$value['id'].'" style="height:40px;" src="/public/img/mychem/conference/prinyto.png"></center>';
+				break;
+			case 2: echo '<center><img class="paulund_modal" status="'.$value['mu_status'].'" id_conf="'.$value['id'].'" style="height:40px;" src="/public/img/mychem/conference/ne_polucheno.png"></center>';
+				break;
+			case 3: echo '<center><img class="paulund_modal" status="'.$value['mu_status'].'" id_conf="'.$value['id'].'" style="height:40px;" src="/public/img/mychem/conference/na_proverke.png"></center>';
+				break;
+			case 4: echo '<center><img class="paulund_modal" status="'.$value['mu_status'].'" id_conf="'.$value['id'].'" style="height:40px;" src="/public/img/mychem/conference/provereno.png"></center>';
+				break;
+			case 5: echo '<center><img class="paulund_modal" status="'.$value['mu_status'].'" id_conf="'.$value['id'].'" style="height:40px;" src="/public/img/mychem/conference/ne_prinyto.png"></center>';
+				break;
+
+			}
+		 
+		   ?> 		   
+	   </td>
+   <td>
+		<?php if($value['mu_status_oplata'] == 1)
+		 echo '<center><img style="height:40px;" src="/public/img/mychem/conference/plus.png"></center>';
+		 else
+		 echo '<center><img style="height:40px;" src="/public/img/mychem/conference/minus.png"></center>';
+		   ?> 
+	</td>     
+
+	</tr>   
+
+
+
+<?php ENDFOREACH; ?>
+</table>
+							
+							
+						 <?php
+							
+							break;
+
+
+
+
+
+
+
+
+
+
+						case 'partaker/tnr_2015':
+
+						   ?>
+						   <hr>						  
+						    <b> Для відправки тез зробіть вибір секції, знайдіть свою роботу та натисніть на "cтатус роботи"</b>
+						   	<table>
+
+						   		<tr>
+									<td><img   style="height:20px;" src="/public/img/mychem/conference/ne_polucheno.png">	– тези НЕ ОТРИМАНО. Терміново надішліть їх!!!&nbsp;&nbsp;&nbsp;</td>
+									<td><img  style="height:20px;" src="/public/img/mychem/conference/na_proverke.png">	– тези знаходяться на перевірці</td>		
+								</tr>
+								<tr>
+									<td><img   style="height:20px;" src="/public/img/mychem/conference/provereno.png"> – тези повернуто для доопрацювання</td>
+									<td><img   style="height:20px;" src="/public/img/mychem/conference/ne_prinyto.png"> – нажаль тези відхилено</td>		
+								</tr>
+								 <tr>
+									<td><img   style="height:20px;" src="/public/img/mychem/conference/prinyto.png"> – тези прийнято</td>
+									
+								</tr>
+
+							</table>
+							<hr>
+							
+							<!--<div>
+							<b>Організаційний внесок</b><br/>
+							Для учасників з України та країн СНД –350 грн.<br/>
+							Заочна участь – 150 грн.<br/>
+							Плату оргвнеска за участь у конференції слід
+							здійснювати на карту Приватбанку
+							№ 4731217104554785 Груздєвій Олені
+							Володимирівні з обов’язковою вказівкою
+							ПІБ учасника і позначкою "оргвнесок
+							конференції ТНР" (Оплату проводити через
+							касу Приватбанку або через Приват24).<br/>
+							Після оплати копію квитанції відправте, будь
+							ласка, організаторам конференції
+							електронною поштою
+							e-mail: tnv15@ukr.net
+
+							</div>-->
+							
+							<hr>
+ 			<div class="sort_conf">
+						 	<div id="type_section">Зробіть вибір секції:</div>
+			<div class="sort_type">
+				<?php foreach ($topic_conf as $key => $value): ?>
+				<div idTopic=<?=$value['id'];?> ><?=$value['value'];?></div>
+				<?php ENDFOREACH;?>
+			</div></div> 
+			
+
+
+
+					   <table class="full_sort" border="1" style="margin: 0 15px 35px ;width:950px">
+	<tr>
+		<th>№</th>
+		<th>П.І.Б.</th>
+		<th>Назва роботи</th>
+		<th>Статус роботи</th>
+		<th>Оплата участі</th>	   
+	</tr>
+<?php 
+
+
+//var_dump($partakerInfo);
+
+
+foreach ($partakerInfo as $key => $value):
+?>
+
+	<tr >
+		<td><?php echo $cnt+=1;  ?></td>
+		<td width="220"><?php echo $value['last_name'].'<br> '.$value['name'].' '.$value['middle_name'] ?></td>
+		<td data="title_public"><?php echo $value['title_public'] ?></td>
+	   <td>
+			<?php 
+			switch($value['mu_status']){
+			case 1: echo '<center><img class="paulund_modal" status="'.$value['mu_status'].'" id_conf="'.$value['id'].'" style="height:40px;" src="/public/img/mychem/conference/prinyto.png"></center>';
+				break;
+			case 2: echo '<center><img class="paulund_modal" status="'.$value['mu_status'].'" id_conf="'.$value['id'].'" style="height:40px;" src="/public/img/mychem/conference/ne_polucheno.png"></center>';
+				break;
+			case 3: echo '<center><img class="paulund_modal" status="'.$value['mu_status'].'" id_conf="'.$value['id'].'" style="height:40px;" src="/public/img/mychem/conference/na_proverke.png"></center>';
+				break;
+			case 4: echo '<center><img class="paulund_modal" status="'.$value['mu_status'].'" id_conf="'.$value['id'].'" style="height:40px;" src="/public/img/mychem/conference/provereno.png"></center>';
+				break;
+			case 5: echo '<center><img class="paulund_modal" status="'.$value['mu_status'].'" id_conf="'.$value['id'].'" style="height:40px;" src="/public/img/mychem/conference/ne_prinyto.png"></center>';
+				break;
+
+			}
+		 
+		   ?> 		   
+	   </td>
+   <td>
+		<?php if($value['mu_status_oplata'] == 1)
+		 echo '<center><img style="height:40px;" src="/public/img/mychem/conference/plus.png"></center>';
+		 else
+		 echo '<center><img style="height:40px;" src="/public/img/mychem/conference/minus.png"></center>';
+		   ?> 
+	</td>     
+
+	</tr>   
+
+
+
+<?php ENDFOREACH; ?>
+</table>
+							
+							
+						 <?php
+							
+							break;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+						case 'partaker/himsovrtehn': ?>
+
+						 <div class="sort_conf">
+						 	<div id="type_section">Зробіть вибір секції:</div>
+			<div class="sort_type">
+				<?php foreach ($topic_conf as $key => $value): ?>
+				<div idTopic=<?=$value['id'];?> ><?=$value['value'];?></div>
+				<?php ENDFOREACH;?>
+			</div></div> 
+
+
+							 <table class="full_sort" border="1" style="margin: 0 15px 35px ;width:950px">
+	<tr>
+		<th>№</th>
+		<th>П.І.Б.</th>
+		<th>Назва роботи</th>
+		<th>Статус роботи</th>
+		<th>Оплата участі</th>	   
+	</tr>
+<?php 
+
+
+//var_dump($partakerInfo);
+
+
+foreach ($partakerInfo as $key => $value):
+?>
+
+	<tr>
+		<td><?php echo $cnt+=1;  ?></td>
+		<td width="220"><?php echo $value['last_name'].'<br> '.$value['name'].' '.$value['middle_name'] ?></td>
+		<td><?php echo $value['title_public'] ?></td>
+		<td>
+						<?php 
+			switch($value['mu_status']){
+			case 1: echo '<center><img class="paulund_modal" status="'.$value['mu_status'].'" id_conf="'.$value['id'].'" style="height:40px;" src="/public/img/mychem/conference/prinyto.png"></center>';
+				break;
+			case 2: echo '<center><img class="paulund_modal" status="'.$value['mu_status'].'" id_conf="'.$value['id'].'" style="height:40px;" src="/public/img/mychem/conference/ne_polucheno.png"></center>';
+				break;
+			case 3: echo '<center><img class="paulund_modal" status="'.$value['mu_status'].'" id_conf="'.$value['id'].'" style="height:40px;" src="/public/img/mychem/conference/na_proverke.png"></center>';
+				break;
+			case 4: echo '<center><img class="paulund_modal" status="'.$value['mu_status'].'" id_conf="'.$value['id'].'" style="height:40px;" src="/public/img/mychem/conference/provereno.png"></center>';
+				break;
+			case 5: echo '<center><img class="paulund_modal" status="'.$value['mu_status'].'" id_conf="'.$value['id'].'" style="height:40px;" src="/public/img/mychem/conference/ne_prinyto.png"></center>';
+				break;
+
+			}
+		 
+		   ?>
+		</td>
+   <td>
+		<?php if($value['mu_status_oplata'] == 1)
+		 echo '<center><img style="height:40px;" src="/public/img/mychem/conference/plus.png"></center>';
+		 else
+		 echo '<center><img style="height:40px;" src="/public/img/mychem/conference/minus.png"></center>';
+		   ?> 
+	</td>    
+
+	</tr>   
+
+
+
+<?php ENDFOREACH; ?>
+</table>
+							
+							
+						 <?php   break;
+
+					}}
+				   
+				}else{
+
+										if(($params['send'] == 'done')){
+							echo "<center><div style='font-size:18px;font-weight:bold;color:green;'>Файл відправлено. Дякуємо Вам за Вашу участь.</div></center>";
+							echo "<a href='http://udhtu.waterh.net/mychem/index/conference/registration'>Повернутися на головну</a>";
+						}
+
+
+
+					if(($params['send'] == 'error')){
+							echo "<center><div style='font-size:18px;font-weight:bold;color:red;'>Файл не відправлено. Спробуйте ще раз.</div></center>";
+							echo "<a href='http://udhtu.waterh.net/mychem/index/conference/registration'>Повернутися на головну</a>";
+						 
+
+					}
+
+										if(($params['user'] == 'error')){
+							echo "<center><div style='font-size:18px;font-weight:bold;color:red;'>Файл не можливо відправити під чужим ім'ям.<br>
+							Повторіть операцію відправки ще раз від свого імені.</div></center>";
+							echo "<a href='http://udhtu.waterh.net/mychem/index/conference/registration'>Повернутися на головну</a>";
+						 
+
+					}
+				
+
+
+
+					if(!$params){
+
+				   echo '<img style="float:right;" src="/public/img/mychem/conference/select.png">';
+
+					//var_dump($error);
+				?>
+	   <!-- <div class="sort_conf">Сортировать конфиренции по:
+			<div class="sort_type">
+				<div >всем</div>
+				<div >дате</div> 
+				<div >началу</div> 
+				<div >окончанию</div> 
+				<div >идуших</div>            
+				<div >прошедших</div>
+			</div></div> -->
+		 <div class="box_conf">   
+		 <? /*
+			<h2 class="punct_conf">Прогрес в технології переробки горючих копалин та хімотології паливно-мастильних матеріалів</h2>
+			
+			<div class="about_conf">               
+				<div class="about_conf_menu"><a href="http://udhtu.com.ua/conference/index.php?p=8"  target="_blank">Інформація</a></div>
+				<?php
+				// if($role == 'budda'): ?>
+				 <div class="about_conf_menu"><a href="/mychem/conference/index/partaker/fuel">Учасники конференції</a></div>
+				 <?php// ENDIF; ?>
+
+				<div class="about_conf_menu"><a href="/mychem/conference/index/registration/fuel">Зареєструватися</a></div>
+				 <!-- <div class="about_conf_menu">Снять с регистрации</div> -->
+				<div class="clear"></div>                   
+			</div>
+				 
+
+			<h2 class="punct_conf">Хімія та сучасні технології</h2>
+			<div class="about_conf">               
+				<div class="about_conf_menu"><a href="http://udhtu.com.ua/conference/index.php?p=26"  target="_blank">Інформація</a></div>
+				<?php
+				//if($role == 'budda'): ?>
+				 <div class="about_conf_menu"><a href="/mychem/conference/index/partaker/himsovrtehn">Учасники конференції</a></div>
+				 <?php //ENDIF; ?>
+				<div class="about_conf_menu"><a href="/mychem/conference/index/registration/himsovrtehn">Зареєструватися</a></div>
+			   <!-- <div class="about_conf_menu">Снять с регистрации</div> -->
+				<div class="clear"></div>                   
+			</div>
+
+						<h2 class="punct_conf">Шевченківський дискурс сучасності</h2>
+			<div class="about_conf">               
+				<!--<div class="about_conf_menu"><a href="http://udhtu.com.ua/conference/index.php?p=26"  target="_blank">Інформація</a></div>-->
+				<?php
+				//if($role == 'budda'): ?>
+				 <div class="about_conf_menu"><a href="/mychem/conference/index/partaker/shevchenko">Учасники конференції</a></div>
+				 <?php //ENDIF; ?>
+				<div class="about_conf_menu"><a href="/mychem/conference/index/registration/shevchenko">Зареєструватися</a></div>
+			   <!-- <div class="about_conf_menu">Снять с регистрации</div> -->
+				<div class="clear"></div>                   
+			</div>
+			
+		</div>
+				
+
+
+
+
+
+<h2 class="punct_conf">Хімія та сучасні технології 85 років</h2>
+			<div class="about_conf">               
+				<div class="about_conf_menu"><a href="http://udhtu.com.ua/conference/index.php?p=7"  target="_blank">Інформація</a></div>
+				<?php
+				//if($role == 'budda'): ?>
+				 <div class="about_conf_menu"><a href="/mychem/conference/index/partaker/himsovrtehn_85year">Учасники конференції</a></div>
+				 <?php //ENDIF; <div class="about_conf_menu"><a href="/mychem/conference/index/registration/himsovrtehn_85year">Зареєструватися</a></div>?>	
+			   <!-- <div class="about_conf_menu">Снять с регистрации</div> -->
+				<div class="clear"></div>                   
+			</div>
+*/?>
+
+<h2 class="punct_conf">Cучасні проблеми технології неорганічних речовин та ресурсозбереження</h2>
+			<div class="about_conf">               
+				<div class="about_conf_menu"><a href="http://udhtu.com.ua/conference/index.php?p=7"  target="_blank">Інформація</a></div>
+				<?php
+				//if($role == 'budda'): ?>
+				 <div class="about_conf_menu"><a href="/mychem/conference/index/partaker/tnr_2015">Учасники конференції</a></div>
+				 <div class="about_conf_menu"><a href="/mychem/conference/index/registration/tnr_2015">Зареєструватися</a></div>
+				 <?php //ENDIF; ?>	
+			   <!-- <div class="about_conf_menu">Снять с регистрации</div> -->
+				<div class="clear"></div>                   
+			</div>
+
+
+
+		   <?php 
+		   /*<h2 class="punct_conf">3 confa </h2>
+			<div class="about_conf">               
+				<div class="about_conf_menu">Информация</div>
+				<div class="about_conf_menu">Зарегистрироваться</div>
+				<div class="about_conf_menu">Снять с регистрации</div> 
+				<div class="clear"></div>                   
+			</div>
+			<h2 class="punct_conf">4 confa </h2>
+			<div class="about_conf">               
+				<div class="about_conf_menu">Информация</div>
+				<div class="about_conf_menu">Зарегистрироваться</div>
+				<div class="about_conf_menu">Снять с регистрации</div> 
+				<div class="clear"></div>                   
+			</div>
+		</div>
+	   */ ?>
+
+		<?php  } }?>
+
+	

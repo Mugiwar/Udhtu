@@ -1,0 +1,249 @@
+<?php header('Content-type: text/html; charset=utf-8'); ?>
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <link rel="SHORTCUT ICON" href="/public/img/global/icon/favicon.png" type="image/png">
+    <link rel="stylesheet" type="text/css" href="/public/css/main.css">  
+    <link rel="stylesheet" type="text/css" href="/public/css/front/front.css">  
+
+    <script type="text/javascript" src="/public/js/jQuery-v1.8.2.js"></script>
+    <script type="text/javascript" src="/public/js/front/jquery.easing.1.3.js"></script>
+    <script type="text/javascript" src="/public/js/jquery.cookie.js"></script>
+    <script type="text/javascript" src="/public/js/front/jq_front.js"></script>
+    <script type="text/javascript" src="/public/js/front/mu_jq_main.js"></script>
+    <script type="text/javascript" src="/public/js/jq_main.js"></script>
+    <script type="text/javascript" src="/public/js/Hurl.js"></script>
+    <script type="text/javascript" src="/public/js/front/jquery.slider.js"></script>
+    <script src="/public/js/front/liteaccordion.jquery.js"></script>
+    <script type="text/javascript" src="/public/js/front/jquery.tmpl.min.js"></script>		
+    <script type="text/javascript" src="/public/js/front/jquery.elastislide.js"></script>
+    <script type="text/javascript" src="/public/js/front/gallery.js"></script>
+    <script type="text/javascript" src="/public/js/jquery-ui.js"></script>
+    
+	<!-- Yandex.Metrika counter -->
+<script type="text/javascript">
+    (function (d, w, c) {
+        (w[c] = w[c] || []).push(function() {
+            try {
+                w.yaCounter34168195 = new Ya.Metrika({
+                    id:34168195,
+                    clickmap:true,
+                    trackLinks:true,
+                    accurateTrackBounce:true,
+                    webvisor:true,
+                    trackHash:true,
+                    ut:"noindex"
+                });
+            } catch(e) { }
+        });
+
+        var n = d.getElementsByTagName("script")[0],
+            s = d.createElement("script"),
+            f = function () { n.parentNode.insertBefore(s, n); };
+        s.type = "text/javascript";
+        s.async = true;
+        s.src = "https://mc.yandex.ru/metrika/watch.js";
+
+        if (w.opera == "[object Opera]") {
+            d.addEventListener("DOMContentLoaded", f, false);
+        } else { f(); }
+    })(document, window, "yandex_metrika_callbacks");
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/34168195?ut=noindex" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+
+    <noscript>
+        <style>
+            .es-carousel ul{
+                display:block;
+            }
+        </style>
+    </noscript>
+    <script id="img-wrapper-tmpl" type="text/x-jquery-tmpl">	
+        <div class="rg-image-wrapper">
+            {{if itemsCount > 1}}
+                <div class="rg-image-nav">
+                    <a href="#" class="rg-image-nav-prev">Previous Image</a>
+                    <a href="#" class="rg-image-nav-next">Next Image</a>
+                </div>
+            {{/if}}
+            <div class="rg-image"></div>
+            <div class="rg-loading"></div>
+            <div class="rg-caption-wrapper">
+                <div class="rg-caption" style="display:none;">
+                    <p></p>
+                </div>
+            </div>
+        </div>
+    </script>
+
+
+    <script type="text/javascript">
+            $(document).ready(function(){
+
+            $(window).scroll(function(){
+                if ($(this).scrollTop() > 100) {
+                    $('.scrollup').fadeIn();
+                } else {
+                    $('.scrollup').fadeOut();
+                }
+            });
+
+            $('.scrollup').click(function(){
+                $("html, body").animate({ scrollTop: 0 }, 600);
+                return false;
+            });
+            
+        });
+    </script>
+    
+    <title>УДХТУ (Український державний хіміко-технологічний університет)</title>
+  
+    <script type="text/javascript">
+        $(window).load(function() {
+            $('#featured').orbit({
+                'advanceSpeed': 8000,
+                'bullets': true,
+                'timer' : true,
+                'animation' : 'horizontal-slide'
+            });
+        });
+    </script>
+
+</head>
+
+<?php 
+
+					$splits = explode('/',trim($_SERVER['REQUEST_URI'],'/'));
+					list($url_part, $qs_part) = array_pad(explode("?", $_SERVER['REQUEST_URI']), 2, ""); // Разбиваем URL на 2 части: до знака ? и после
+					//$url_part = ($url_part != '/') ? $url_part : '/index/index';
+					switch ($_SESSION['lang']) {
+						case '1':
+							$activ_lang_ukr = "30px";
+							$language = 1;
+							$lang_header = '/public/img/front/background/nazva_ukr.png';
+							$head_text = "Український державний<br/>хіміко-технологічний університет";
+							$lang_soc = '<p>Ми у соціальних мережах:</p>';
+							break;
+						case '2':
+							$activ_lang_eng = "30px";
+							$language = 2;
+							$lang_header = '/public/img/front/background/nazva_eng.png';
+							$head_text = "Ukrainian State University of<br/>Chemical Technology";
+							$lang_soc = '';
+							break;
+						case '3':
+							$activ_lang_rus = "30px";
+							$language = 3;
+							$head_text = "Украинский государственный<br/>химико-технологический университет";
+							$lang_header = '/public/img/front/background/nazva_rus.png';
+							$lang_soc = '<p>Мы в социальных сетях:</p>';
+							break;
+						
+						default:
+							$language = 1;
+							break;
+					}
+?>
+
+
+ <body>  	
+ <div id="wr-head"></div>	
+	<div id="container">
+		<div id="main">
+		 	<div id="head-0"> 
+
+					<ul> 
+						<li  class="urss vline" ><a href="#">Підписатись на новини</a></li>
+						<li  class=" vline" ><a href="/zagalna_informaciya/doc/dokumentaciya">База документів</a></li>  
+						<li  style="padding: 0 0 0 20px;" class=" " ><a href="/login">Особистий кабінет</a></li>
+						<!-- <li  class=" " ><input id="site-search" type="text" name="search" value="Пошук"></li> -->
+						<li style="display: block; float: right !important;"   ><a href="/zagalna_informaciya/site_map/shema_saytu"><i class="icon-site-map"></i></a></li> 
+					</ul>
+
+
+				</div>
+				<div id="header">
+
+					<div id="header-logo">
+						<a href="/"><img  src="/public/img/front/background/logo-udhtu.png"></a>
+					</div>
+
+					
+					<div id="lang">
+						<p><img style="height:<?=$activ_lang_ukr?>" title='ukr' src="/public/img/global/icon/ukr.png"></p>
+						<p><img style="height:<?=$activ_lang_eng?>" title='eng' src="/public/img/global/icon/eng.png"></p>
+						<p><img style="height:<?=$activ_lang_rus?>" title='rus' src="/public/img/global/icon/rus.png"></p>
+                       
+                    </div>
+					
+
+					<div id="head-text"><a href="/"><?=$head_text?></a></div>			
+					
+			<div id="top-menu">
+					<?php include  __DIR__.'/top_menu.phtml';?>						
+				</div>	
+				</div>	
+
+	
+			
+			<div id="left-menu">
+							
+					<?php include  __DIR__.'/left_menu.phtml';?>	
+			<div id="soc_net">
+				<?=$lang_soc?>
+				<a target="_blank" href="https://vk.com/udhtu_official_group"><img src="/public/img/global/icon/vk.png"></a>
+				<a target="_blank" href="https://www.facebook.com/UDHTU.Official"><img src="/public/img/global/icon/fb.png"></a>
+
+			</div>	
+			</div>
+
+				
+			<div id="right-menu">						
+					
+					<?php include  __DIR__.'/right_menu.phtml';?>		
+			</div>
+			
+			
+				<div id="content">	<?=$content ?> </div> <!-- /content -->
+			</div>			
+<?php 
+switch ($_SESSION['lang'] ) {
+	case 1: ?>
+		<div id="footer">				
+				<p>©2008-<?php echo date('Y')?> ДВНЗ "Український державний хіміко-технологічний університет"</p>
+				<p>Тел. +38(0562) 47-46-70, Факс: +38(0562) 47-33-16.</p>
+				<p>Приймальна комісія: тел/факс: +38(0562) 47-34-49</p>
+				<p>e-mail: udhtu@udhtu.edu.ua</p>
+			</div> <!-- /end footer -->			
+		<?php break;		
+	case 2: ?>
+		<div id="footer">				
+				<p>©2008-<?php echo date('Y')?> SHEI Ukrainian State University of Chemical Technology</p>
+				<p>Phone +38(0562) 47-46-70, Fax: +38(0562) 47-33-16.</p>
+				<p>Admission Committee: phone/fax: +38(0562) 47-34-49</p>
+				<p>e-mail: udhtu@udhtu.edu.ua</p>
+			</div> <!-- /end footer -->			
+	<?php break;
+	case 3: ?>
+		<div id="footer">				
+				<p>©2008-<?php echo date('Y')?> SHEI Ukrainian State University of Chemical Technology</p>
+				<p>Phone +38(0562) 47-46-70, Fax: +38(0562) 47-33-16.</p>
+				<p>Admission Committee: phone/fax: +38(0562) 47-34-49</p>
+				<p>e-mail: udhtu@udhtu.edu.ua</p>
+			</div> <!-- /end footer -->			
+	<?php break;
+		default:
+		# code...
+		break;
+}
+
+
+?>
+		
+		</div>
+	</div>
+	<a href="#" class="scrollup">Вгору</a>
+  </body>
+</html>

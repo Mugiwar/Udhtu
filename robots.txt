@@ -1,0 +1,3 @@
+﻿User-agent: Yandex
+Disallow:
+Host: udhtu.edu.ua

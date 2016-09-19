@@ -1,0 +1,79 @@
+<?php 
+if ($pageAction):
+	if ($pageAction === "edit_") {		
+		 foreach ($arrSubSection as $key => $value){
+		 	if ($value['id'] == $id){
+		 		$subsection_value = $value['subsection'];
+		 		$section_value = $value['gx_section'];
+		 		$url_value = $value['url'];
+		 		$status_value = $value['gx_status'];
+		 		$select = "selected";
+
+		 	}
+		 			
+
+		 }	
+	} 
+	?>
+
+<div class="add_content">	
+	<form name="<?=$pageAction?>form_subsection" method="post" action="">
+		<p>Создать подраздел</p>
+		<p><input type="text" name="<?=$pageAction?>subSection" value="<?=$subsection_value?>"></p>
+		<p>Ссылка</p>
+		<p><input type="text" name="<?=$pageAction?>url_subSection" value="<?=$url_value?>"></p>
+	<div id="section">
+			<label >Выбирите  раздел к которому относится</label>
+			<select class="form_field_select"  name="<?=$pageAction?>section">		
+				<option selected disabled data="option_degree_0" value=0 >Розделы</option>
+					<?php foreach($section as $key => $value):
+							  if ($value['id'] == $section_value) {
+							echo '<option  selected data="" value="'.$value['id'].'">'.$value['section'].'</option>';	}else{	
+								echo '<option data="" value="'.$value['id'].'">'.$value['section'].'</option>';
+							}
+
+					ENDFOREACH?>
+			</select></div>	
+	<div id="status">
+			<label >Выбирите  раздел к которому относится</label>
+			<select class="form_field_select"  name="<?=$pageAction?>status">		
+				<option selected disabled data="option_degree_0" value=0 >Статус</option>
+					<?php foreach($status as $key => $value):
+					    if ($key == $status_value) {
+							echo '<option selected value="'.$key.'">'.$value.'</option>';
+						}else{
+							echo '<option  value="'.$key.'">'.$value.'</option>';			}
+					ENDFOREACH;?>
+			</select></div>	
+			<p><input type="hidden" name="pageAction" value="<?=$pageAction?>"></p>	
+		<input type="submit" value=" Сохранить ">
+	</form>
+</div>
+
+
+
+
+
+	<?php ENDIF;?>
+
+<?php if (!$pageAction):
+?>
+<div class="page_section">
+	<center><p><h2>Тут создаются подразделі<h2></p></center>
+	<div class="title">		
+		<div><p>Разделы</p></div>	
+		<div style="margin-left:500px"><p>Статус</p></div>		
+	</div>
+<div class="arrSection">
+<?php foreach ($arrSubSection as $key => $value):?>	
+		<div class="section"><a href="http://<?=$_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI']?>/edit/<?=$value['id']?>"><?=$value['subsection']?></a>
+		<div class="status"><?=$value['status']?></div></div>
+<?php 
+ENDFOREACH;?>
+
+</div>
+		<p><a href="subSection/new/insert">New</a></p>
+</div>
+<?php
+ENDIF;?>
+	

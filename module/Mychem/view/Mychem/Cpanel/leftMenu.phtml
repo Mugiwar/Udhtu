@@ -1,0 +1,75 @@
+<?php 
+if ($pageAction):
+	if ($pageAction === "edit_") {		
+		 foreach ($arrLeftMenu as $key => $value){
+		 	if ($value['id'] == $id){
+		 		$subsection_value = $value['gx_subsection'];		 		
+		 		$url = $value['url'];
+		 		$url_name = $value['url_name'];
+		 		$status_value = $value['gx_status'];
+		 		$select = "selected";
+
+		 	
+		 			
+		 	}
+		 }
+	} 	
+	?>
+
+
+
+
+<div class="add_content">	
+	<form name="<?=$pageAction?>form_leftMenu" method="post" action="">		
+	<div id="mu_degree">
+			<label >Выбирите  подраздел к которому относится</label>
+			<select class="form_field_select"  name="<?=$pageAction?>subsection">		
+				<option selected disabled data="option_degree_0" value=0 >Подрозделы</option>
+						<?php foreach($subSection as $key => $value):
+							  if ($value['id'] == $subsection_value) {
+							echo '<option  selected data="" value="'.$value['id'].'">'.$value['subsection'].'</option>';	}else{	
+								echo '<option data="" value="'.$value['id'].'">'.$value['subsection'].'</option>';
+							}
+
+					ENDFOREACH?>
+			</select></div>	
+			<p>Название ссылки</p>
+			<p><input type="text" name="<?=$pageAction?>urlName" value="<?=$url_name?>"></p>
+			<p>Сама ссылка</p>
+			<p><input type="text" name="<?=$pageAction?>url" value="<?=$url?>"></p>	
+	<div id="mu_degree">
+			<label >Статус</label>
+			<select class="form_field_select"  name="<?=$pageAction?>status">		
+				<option selected disabled data="option_degree_0" value=0 >Статус</option>
+					<?php foreach($status as $key => $value):
+					    if ($key == $status_value) {
+							echo '<option selected value="'.$key.'">'.$value.'</option>';
+						}else{
+							echo '<option  value="'.$key.'">'.$value.'</option>';			}
+					ENDFOREACH;?>
+			</select></div>	
+			<p><input type="hidden" name="pageAction" value="<?=$pageAction?>"></p>	
+		<input type="submit" value=" Сохранить ">
+	</form>
+</div>
+	<?php ENDIF;?>
+
+
+	<?php 
+if (!$pageAction):
+?>
+<div class="page_section">
+	<center><p><h2>Тут создаются Left menu<h2></p></center>
+	
+<div class="content_sm">
+<?php foreach ($arrLeft as $key => $value):?>	
+		<contentSub data="<?=$value['gx_subsection']?>"><?=$value['subsection']?>	</contentSub>
+			
+<?php 
+ENDFOREACH;?>
+
+</div>
+	<p><a href="leftMenu/new/insert">New</a></p>
+</div>
+<?php
+ENDIF;?>

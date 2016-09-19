@@ -1,0 +1,59 @@
+<?php 
+if ($pageAction):
+	if ($pageAction === "edit_") {		
+		 foreach ($arrSection as $key => $value){
+		 	if ($value['id'] == $id){
+		 		$section_value = $value['section'];
+		 		$status_value = $value['gx_status'];
+		 		$select = "selected";
+
+		 	}
+		 			
+
+		 }	
+	}elseif ($pageAction === "new_") {
+		# code...
+	}
+?>
+<div class="add_content">	
+	<form name="<?=$pageAction?>form_section" method="post" action="">
+		<p><?=$pageAction?> раздел</p>
+		<p><input type="text" name="<?=$pageAction?>section" value="<?=$section_value?>"></p>
+		<div id="mu_degree">
+			<label >Статус</label>
+			<select class="form_field_select"  name="<?=$pageAction?>status">		
+				<option selected disabled data="option_degree_0" value=0 >Статус</option>
+					<?php foreach($status as $key => $value):						
+						if ($key == $status_value) {
+							echo '<option selected value="'.$key.'">'.$value.'</option>';
+						}else{
+							echo '<option  value="'.$key.'">'.$value.'</option>';			}
+					ENDFOREACH;?>
+			</select></div>	
+		<p><input type="hidden" name="pageAction" value="<?=$pageAction?>"></p>
+		<input type="submit" value=" Сохранить ">
+	</form>
+</div>
+	<?php ENDIF;?>
+
+<?php 
+if (!$pageAction):
+?>
+<div class="page_section">
+	<center><p><h2>Тут создаются разделі<h2></p></center>
+	<div class="title">		
+		<div><p>Разделы</p></div>	
+		<div style="margin-left:500px"><p>Статус</p></div>		
+	</div>
+<div class="arrSection">
+<?php foreach ($arrSection as $key => $value):?>	
+		<div class="section"><a href="http://<?=$_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI']?>/edit/<?=$value['id']?>"><?=$value['section']?></a>
+		<div class="status"><?=$value['status']?></div></div>
+<?php 
+ENDFOREACH;?>
+
+</div>
+	<p><a href="section/new/insert">New</a></p>
+</div>
+<?php
+ENDIF;?>

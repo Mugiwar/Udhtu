@@ -1,0 +1,188 @@
+<?php  
+use Mychem\Model\SqlContent;
+
+$SqlContent = new SqlContent();	
+
+			
+			$blockMenu = $SqlContent->getBFMenu($language,'block/subblock/page');
+			//$punctMenu = $SqlContent->getPunctMenu($language);
+			//$getSubPunctMenu = $getLeftMenu->getSubPunctMenu();
+			//var_dump($blockMenu);
+						
+			foreach ($blockMenu as $key => $value1){	
+					$blockMenu[$key] = $value1;
+			}
+
+			foreach ($punctMenu as $key => $value){						
+				$punctMenu[$key] = $value;
+				}
+
+			/*foreach ($getSubPunctMenu as $key => $value){
+							foreach ($value as $key => $value)
+				$getSubPunctMenu[$key] = $value;
+				}
+				*/
+				
+				for ($i=0; $i < count($blockMenu) ; $i++) { 
+					switch ($blockMenu[$i]['type_position']) {
+						case 'left':
+							//asort($fruits, SORT_NUMERIC)
+							//echo $blockMenu[$i]['porydok'] ;
+							$blockLeftMenu[$i] = $blockMenu[$i];
+
+							break;
+						case 'top':
+							//asort($fruits, SORT_NUMERIC)
+							//echo $blockMenu[$i]['porydok'] ;
+							$blockLeftMenu[$i] = $blockMenu[$i];
+							break;
+						case 'right':
+							//echo 'right';
+							//echo $blockMenu[$i]['porydok'] ;
+							$blockRightMenu[$i] = $blockMenu[$i];
+							break;
+						case 'center':
+							//echo 'center';
+							//echo $blockMenu[$i]['porydok'] ;
+							$blockCenterMenu[$i] = $blockMenu[$i];
+							break;						
+						default:
+							# code...
+							break;
+					}					
+				}
+
+
+	
+
+
+					function cmp($a, $b)
+					{
+					   return strcmp($a["porydok"], $b["porydok"]);
+					}
+					usort($blockLeftMenu, "cmp");
+				//var_dump($punctMenu0);
+
+				
+							//var_dump($punctMenu1);
+
+//SELECT * FROM `mu_block_punct` WHERE id  IN (SELECT `parents_punct` FROM `mu_block_punct`) <div id="object" class="stretchLeft"></div>
+		if($blockLeftMenu){
+			echo ' <ul class="l-menu"  style="padding:0" >';
+			foreach ($blockLeftMenu as $key => $value) {					
+				if($value['type_content']=='block' || $value['type_content']=='folder' ){
+				if($value['type_content']=='block')	
+					echo ' <li class="menu" style="background-color:cornflowerblue"> <ul> ';
+				else
+					echo ' <li class="menu"> <ul> ';
+
+					echo ' <li mrd = "'.$value["id_mrd"].'" type_face="front" position="'.$value["position"].'-menu" type="subblock" class="button path" path='.$value["path"].'><a href='.$value["id_mrd"].' class="box1">'.$value["data"].'</a></li> <li class="dropdown"><ul>';
+					foreach ($blockLeftMenu as $key => $value1) {
+						if($value1['path'] == $value["path"] && $value1['type_content'] != 'block' && $value1['type_content'] != 'folder' ){
+							if($value1["url"] == '#')
+								$pos = 'position="'.$value1["position"].'-menu"';
+							else
+								$pos = 'position="'.$value1["position"].'-menu"';
+							if($value1["path"] != $value1["id_mtt"])
+								$value1["path"] = $value1["path"].'/'.$value1["id_mtt"];	
+							echo ' <li mrd = "'.$value1["id_mrd"].'" type_face="front" type="subblock" class="path" '.$pos.' path='.$value1["path"].'><a href='.$value1["path"].'>'.$value1["data"].'</a></li> ';
+						}
+					}
+					echo ' </ul></li></ul></li>';
+				}
+			}
+			echo ' </ul>';
+		}
+?>
+ 			
+
+<!--
+
+  <ul class="l-menu" style="padding:0">
+      <li class="menu">      
+          <ul>
+		    <li class="button"><a href="#" class="box1">ГЛАВНАЯ</a></li>
+            <li class="dropdown">
+                <ul>
+                    <li><a href="#">Пункт1</a></li>
+                    <li><a href="#">Пункт2</a></li>
+                    <li><a href="#">Пункт3</a></li>
+                    <li><a href="#">Пункт4</a></li>
+                </ul>
+			</li>
+          </ul>          
+      </li>      
+      <li class="menu">      
+          <ul>
+		    <li class="button"><a href="#" class="box2">ФОТО</a></li>          	
+            <li class="dropdown">
+                <ul>
+                    <li><a href="#">Пункт1</a></li>
+                    <li><a href="#">Пункт2</a></li>
+                    <li><a href="#">Пункт3</a></li>
+                </ul>
+			</li>
+          </ul>          
+      </li>      
+      <li class="menu">      
+          <ul>
+		    <li class="button"><a href="#" class="box3">ВИДЕО</a></li>
+            <li class="dropdown">
+                <ul>
+                    <li><a href="#">Пункт1</a></li>
+                    <li><a href="#">Пункт2</a></li>
+                    <li><a href="#">Пункт3</a></li>
+                    <li><a href="#">Пункт4</a></li>
+                </ul>
+			</li>
+          </ul>          
+      </li>   
+      <li class="menu">     
+          <ul>
+		    <li class="button"><a href="#" class="box4">БЛОГИ</a></li>
+            <li class="dropdown">
+                <ul>
+                    <li><a href="#">Пункт1</a></li>
+                    <li><a href="#">Пункт2</a></li>
+                    <li><a href="#">Пункт3</a></li>
+                </ul>
+			</li>
+          </ul>         
+      </li>
+      <li class="menu">     
+          <ul>
+		    <li class="button"><a href="#" class="box5">ИГРЫ</a></li>
+            <li class="dropdown">
+                <ul>
+                    <li><a href="#">Пункт1</a></li>
+                    <li><a href="#">Пункт2</a></li>
+                    <li><a href="#">Пункт3</a></li>
+                    <li><a href="#">Пункт4</a></li>
+                    <li><a href="#">Пункт5</a></li>
+                    <li><a href="#">Пункт6</a></li>
+                </ul>
+			</li>
+          </ul>         
+      </li>
+      <li class="menu">     
+          <ul>
+		    <li class="button"><a href="#" class="box6">КОНТАКТЫ</a></li>
+            <li class="dropdown">
+                <ul>
+                    <li><a href="#">Пункт1</a></li>
+                    <li><a href="#">Пункт2</a></li>
+                    <li><a href="#">Пункт3</a></li>
+                </ul>
+			</li>
+          </ul>         
+      </li>
+  </ul>
+
+
+-->
+
+
+
+
+
+

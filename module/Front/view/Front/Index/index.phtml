@@ -1,0 +1,231 @@
+<?php 
+
+
+
+if(!empty($content)){
+foreach ($content as $key => $value) {	
+		echo $value['content'];
+	}
+}else{
+	switch ($_SESSION['lang']) {
+		case 1:
+		?>
+	<div>			
+		<div id="featured"> 
+		<!--	<div class="content">
+				<h1>Контент внутри слайда.</h1>
+				<h3>Выдели меня... я текст.</h3> 
+			</div> для надписей на картинках-->
+			<a data-caption="#slider_42" href="/zagalna_informaciya/news/zagalni/studrob"><img src="/public/userfiles/image/slider_42.jpg" /></a>
+			<a data-caption="#slider_48" href="/zagalna_informaciya/news/nauka/studenti_udhtu_pidkoryuyut_evropu"><img src="/public/userfiles/image/slider_48.jpg" /></a>
+			<a data-caption="#slider_36" href="/abiturientu/prezentaciya/reytingi"><img src="/public/userfiles/image/slider_36.jpg" /></a>
+			<!--<a data-caption="#slider_14" href="/abiturientu/vstup/test"><img src="/public/userfiles/image/slider_14.jpg" /></a>-->
+			<a data-caption="#slider_31" ><img src="/public/userfiles/image/slider_31.jpg" /></a>
+					
+		</div>
+		<!-- Captions for Orbit -->
+			<span class="orbit-caption" id="slider_42" style="text-align: center;">Працевлаштування студентів</span>
+			<span class="orbit-caption" id="slider_48" style="text-align: center;">Студенти УДХТУ підкорюють Європу</span>
+			<span class="orbit-caption" id="slider_36" style="text-align: center;">Рейтинг УДХТУ за даними Scopus</span>
+			<!--<span class="orbit-caption" id="slider_14" style="text-align: center;">Не знаєш як обрати професію? Пройди тест і ми допоможемо з вибором!</span>-->
+			<span class="orbit-caption" id="slider_31" style="text-align: center;">Для студентів 1-3 курсів друга вища освіта за будь-якою спеціальністю нашого університету</span>
+					
+		<div class="mp-news">
+			<div>
+				<a href="/zagalna_informaciya/news/nauka/postigaya_novoe_my_dvizhemsya_vpered"><img src="/public/userfiles/image/TNV_Norvegia_10.jpg"></a>
+				<a style="z-index:200" href="/zagalna_informaciya/news/nauka/postigaya_novoe_my_dvizhemsya_vpered"><div class="mp_news_comment" style="text-align: center;">Постигая новое, мы движемся вперед</div></a>	
+			</div>
+			<div>
+				<a href="/zagalna_informaciya/news/zagalni/zustrich_rektora"><img src="/public/userfiles/image/zustrich_z_rektorom_2016%20(1).JPG"></a>
+				<a style="z-index:200" href="/zagalna_informaciya/news/zagalni/zustrich_rektora"><div class="mp_news_comment" style="text-align: center;">Зустріч ректора з першокурсниками</div></a>	
+			</div>
+			<div>
+				<a href="/zagalna_informaciya/news/zagalni/posvyachennya_u_studenti_2016"><img src="https://pp.vk.me/c626828/v626828815/2b4d6/0Yq1KjTH_Ss.jpg"></a>
+				<a style="z-index:200" href="/zagalna_informaciya/news/zagalni/posvyachennya_u_studenti_2016"><div class="mp_news_comment" style="text-align: center;">Посвята першокурсників у студенти</div></a>	
+			</div>
+															
+			<div>
+				<a href="/zagalna_informaciya/news/zagalni/neobhidna_dopomoga"><img src="https://pp.vk.me/c633222/v633222869/4bb30/kUgi68CO0Ms.jpg"></a>
+				<a style="z-index:200" href="/zagalna_informaciya/news/zagalni/neobhidna_dopomoga"><div class="mp_news_comment" style="text-align: center;">Необхідна допомога</div></a>	
+			</div>
+			<div>			
+				<a href="/zagalna_informaciya/news/kultura/pershokursnik_u_muzeyi"><img src="https://pp.vk.me/c633429/v633429869/4754f/2uSMYSNR9Kc.jpg"></a>
+				<a style="z-index:200" href="/zagalna_informaciya/news/kultura/pershokursnik_u_muzeyi"><div class="mp_news_comment">Першокурсник у музеї</div></a>
+			</div>
+			<div>			
+				<a href="/zagalna_informaciya/news/zagalni/z_viroyu_v_silu_nauki_biliy_ya_i"><img src="https://pp.vk.me/c622616/v622616397/47c0b/YN9fymXOtJQ.jpg"></a>
+				<a style="z-index:200" href="/zagalna_informaciya/news/zagalni/z_viroyu_v_silu_nauki_biliy_ya_i"><div class="mp_news_comment">"З вірою в силу науки". Білий Я.І.</div></a>
+			</div>
+
+			<div>
+				<a href="/zagalna_informaciya/news/nauka/bezkoshtovne_navchannya_u_norvegiyi_ta_polschi"><img src="/public/userfiles/image/conkurs_waterh.jpg"></a>
+				<a style="z-index:200" href="/zagalna_informaciya/news/nauka/bezkoshtovne_navchannya_u_norvegiyi_ta_polschi"><div class="mp_news_comment" style="text-align: center;">Безкоштовне навчання у Норверії та Польщі</div></a>
+			</div>
+			<div>
+				<a href="/nauka/konferenciyi/aktualni_podiyi"><img src="/public/usefiles/1/1/2/1/f18cfe2c5c7720db25c8b5b6a54940a4.jpg"></a>
+				<a style="z-index:200" href="/nauka/konferenciyi/aktualni_podiyi"><div class="mp_news_comment" style="text-align: center;">Наукові конкурси від НАН України</div></a>
+			</div>
+			<div>
+				<a href="/Novini/2015_/arhiv_novin"><img src="/public/userfiles/image/arhiv.png"></a>
+				<a style="z-index:200" href="/Novini/2015_/arhiv_novin"><div class="mp_news_comment">Архів подій</div></a>			
+			</div>
+			
+			
+			
+		</div>	
+	</div>
+
+		
+		<?php	break;
+		case 2: ?>
+	<div>		
+		<div id="featured"> 
+			<a  data-caption="#slider_1" href="/studentu/why_study/about_dnipropetrovsk"><img src="/public/userfiles/image/slider_eng_1.jpg" alt="slider_1"  data-caption="#slider_1" /></a>
+			<a  data-caption="#slider_6" href="/news/new/culture/presentation_of_the_university_in_the_city_park"><img src="/public/userfiles/image/slider_eng_6.jpg" alt="slider_6"  data-caption="#slider_6" /></a>
+			<!--<a href="/abiturientu/den_vidkritih_dverej/den_vidkritih_dverey"></a>--><img src="/public/userfiles/image/slider_eng_2.jpg" alt="slider_2"  data-caption="#slider_2" />
+			<!--<a href="/abiturientu/den_vidkritih_dverej/robota_shkoli"></a>--><img src="/public/userfiles/image/slider_eng_33.jpg" alt="slider_33"  data-caption="#slider_33" />
+			<!--<a href="/studentu/studentska_nauka/konkursi"></a>--><img src="/public/userfiles/image/slider_eng_4.jpg" alt="slider_4"  data-caption="#slider_4" />
+			<a data-caption="#slider_5" href="/vm/md/proekti"><img src="/public/userfiles/image/slider_eng_5.jpg" alt="slider_5"  data-caption="#slider_5" /></a>
+            <!--<a href="/vm/md/proekti"><img src="/public/userfiles/image/slider_8.jpg" alt="slider_8"  data-caption="slider_8" /></a>-->
+			<!--<img src="/public/img/front/slider/slider_2.jpg" alt="slider_3"  data-caption="slider_3" />
+			<img src="/public/img/front/slider/slider_3.jpg" alt="slider_4"  data-caption="slider_4" />
+			<img src="/public/img/front/slider/slider_4.jpg" alt="slider_5"  data-caption="slider_5" />-->
+
+			<span class="orbit-caption" id="slider_1" style="text-align: center;">Dnipro is a big industrial, educational and cultural center, situated on the Dnieper River in East-Central Ukraine</span>
+			<span class="orbit-caption" id="slider_6" style="text-align: center;">Presentation of the University in the city park</span>
+			<span class="orbit-caption" id="slider_2" style="text-align: center;">Higher Education in the field of chemical technology and engineering</span>
+			<span class="orbit-caption" id="slider_33" style="text-align: center;">The Rector of SHEI USUCT hands in a master's degree diploma in the field of oil-refractory</span>
+			<span class="orbit-caption" id="slider_4" style="text-align: center;">More than 1,500 professionals graduate from SHEI USUCT every year</span>
+			<span class="orbit-caption" id="slider_5" style="text-align: center;">Erasmus+</span>
+            <!--<span class="orbit-caption" id="slider_8" style="text-align: center;">УДХТУ приймає участь у Європейському освітньому проекті Erasmus+</span>-->
+		</div> 
+				
+		<div class="mp-news">
+			<div>
+				<a href="/studentu/why_study/about_ukraine"><img src="/public/userfiles/image/Ukraine.jpg"></a>
+				<a style="z-index:200" href="/studentu/why_study/about_ukraine"><div class="mp_news_comment" style="text-align: center;">Welcome to Ukraine. Film about Ukraine</div></a>	
+			</div>
+			<div>
+				<a href="/studentu/why_study/about_dnipropetrovsk"><img src="/public/userfiles/image/Dnipropetrovsk.jpg"></a>
+				<a style="z-index:200" href="/studentu/why_study/about_dnipropetrovsk"><div class="mp_news_comment" style="text-align: center;">Dnipro is a dynamic and lively city</div></a>	
+			</div>
+			<div>			
+				<a href="/studentu/why_study/why_study_in_usuct"><img src="/public/userfiles/image/UDHTU.jpg"></a>
+				<a style="z-index:200" href="/studentu/why_study/why_study_in_usuct"><div class="mp_news_comment" style="text-align: center;">Ukrainian State University of Chemical Technology is a powerful specialized multidisciplinary state university</div></a>
+			</div>
+
+			<div>
+				<a href="/nauka/science/our_science"><img src="/public/userfiles/image/nauka.jpg"></a>
+				<a style="z-index:200" href="/nauka/science/our_science"><div class="mp_news_comment" style="text-align: center;">Scientific research is the base of higher education</div></a>	
+			</div>
+			<div>
+				<a href="/culture_and_sport/culture"><img src="/public/userfiles/image/kultura.jpg"></a>
+				<a style="z-index:200" href="/culture_and_sport/culture"><div class="mp_news_comment" style="text-align: center;">We are young and talented</div></a>	
+			</div>
+			<div>
+				<a href="/culture_and_sport/sport"><img src="/public/userfiles/image/sport.jpg"></a>
+				<a style="z-index:200" href="/culture_and_sport/sport"><div class="mp_news_comment" style="text-align: center;">Sport is essential part of student life</div></a>			
+			</div>
+
+			<div>
+				<a href="/nauka/konferenciyi"><img src="/public/userfiles/image/conference.png"></a>
+				<a style="z-index:200" href="/nauka/konferenciyi"><div class="mp_news_comment" style="text-align: center;">Scientific conferences</div></a>	
+			</div>
+			<div>
+				<a href="/nauka/vidavnicha_diyalnist/zhurnal_ek"><img src="http://ek-visnik.dp.ua/public/img/front/logo/all.png"></a>
+				<a style="z-index:200" href="/nauka/vidavnicha_diyalnist/zhurnal_ek"><div class="mp_news_comment" style="text-align: center;">"The Economic Journal"</div></a>	
+			</div>
+			<div>
+				<a href="/nauka/vidavnicha_diyalnist/zhurnal_vhhtv"><img src="http://vhht.dp.ua/public/img/front/logo/all.png"></a>
+				<a style="z-index:200" href="/nauka/vidavnicha_diyalnist/zhurnal_vhhtv"><div class="mp_news_comment" style="text-align: center;">Journal "The Issues of Chemistry and<br />Chemical Technology"</div></a>			
+			</div>
+		</div>	
+	</div>
+		
+<?php	break;
+		case 3: ?>
+	<div>		
+		<div id="featured"> 
+			<!--<a href="/abiturientu/den_vidkritih_dverej/pidgotovchi_kursi"></a>--><img src="/public/userfiles/image/slider_rus_1.jpg" alt="slider_1"  data-caption="#slider_1" />
+			<!--<a href="/abiturientu/den_vidkritih_dverej/den_vidkritih_dverey"></a>--><img src="/public/userfiles/image/slider_eng_2.jpg" alt="slider_2"  data-caption="#slider_2" />
+			<!--<a href="/abiturientu/den_vidkritih_dverej/robota_shkoli"></a>--><img src="/public/userfiles/image/slider_rus_3.jpg" alt="slider_3"  data-caption="#slider_3" />
+			<!--<a href="/studentu/studentska_nauka/konkursi"></a>--><img src="/public/userfiles/image/slider_eng_4.jpg" alt="slider_4"  data-caption="#slider_4" />
+			<a href="/vm/md/proekti"><img src="/public/userfiles/image/slider_eng_5.jpg" alt="slider_5"  data-caption="#slider_5" /></a>
+            <!--<a href="/vm/md/proekti"><img src="/public/userfiles/image/slider_8.jpg" alt="slider_8"  data-caption="slider_8" /></a>-->
+			<!--<img src="/public/img/front/slider/slider_2.jpg" alt="slider_3"  data-caption="slider_3" />
+			<img src="/public/img/front/slider/slider_3.jpg" alt="slider_4"  data-caption="slider_4" />
+			<img src="/public/img/front/slider/slider_4.jpg" alt="slider_5"  data-caption="slider_5" />-->
+
+			<span class="orbit-caption" id="slider_1" style="text-align: center;">Днепропетровск - крупнейший промышленный, образовательный и культурный центр Украины</span>
+			<span class="orbit-caption" id="slider_2" style="text-align: center;">Высшее образование в области химической технологии и инженерии</span>
+			<span class="orbit-caption" id="slider_3" style="text-align: center;">Вручение дипломов магистра 2016</span>
+			<span class="orbit-caption" id="slider_4" style="text-align: center;">Каждый год более 1500 специалистов заканчивают свое обучение в ГВУЗ УГХТУ</span>
+			<span class="orbit-caption" id="slider_5" style="text-align: center;">Erasmus+</span>
+            <!--<span class="orbit-caption" id="slider_8" style="text-align: center;">УДХТУ приймає участь у Європейському освітньому проекті Erasmus+</span>-->
+		</div> 
+				
+		<div class="mp-news">
+			<div>
+				<a href="/obuchenie/pochemu_imenno_u_nas/ukraina"><img src="/public/userfiles/image/Ukraine.jpg"></a>
+				<a style="z-index:200" href="/obuchenie/pochemu_imenno_u_nas/ukraina"><div class="mp_news_comment" style="text-align: center;">Добро пожаловать в Украину.<br />Фильм про Украину</div></a>	
+			</div>
+			<div>
+				<a href="/obuchenie/pochemu_imenno_u_nas/dnepr"><img src="/public/userfiles/image/Dnipropetrovsk.jpg"></a>
+				<a style="z-index:200" href="/obuchenie/pochemu_imenno_u_nas/dnepr"><div class="mp_news_comment" style="text-align: center;">Днепропетровск -<br />динамичный и живой город</div></a>	
+			</div>
+			<div>			
+				<a href="/obuchenie/pochemu_imenno_u_nas/ughtu"><img src="/public/userfiles/image/UDHTU.jpg"></a>
+				<a style="z-index:200" href="/obuchenie/pochemu_imenno_u_nas/ughtu"><div class="mp_news_comment" style="text-align: center;">УГХТУ - единственный специализированный многопрофильный государственный университет</div></a>
+			</div>
+
+			<div>
+				<a href="/nauka/science/our_science"><img src="/public/userfiles/image/nauka.jpg"></a>
+				<a style="z-index:200" href="/nauka/science/our_science"><div class="mp_news_comment" style="text-align: center;"><br />Наука</div></a>	
+			</div>
+			<div>
+				<a href="/culture_and_sport/culture"><img src="/public/userfiles/image/kultura.jpg"></a>
+				<a style="z-index:200" href="/culture_and_sport/culture"><div class="mp_news_comment" style="text-align: center;"><br />Культура</div></a>	
+			</div>
+			<div>
+				<a href="/culture_and_sport/sport"><img src="/public/userfiles/image/sport.jpg"></a>
+				<a style="z-index:200" href="/culture_and_sport/sport"><div class="mp_news_comment" style="text-align: center;"><br />Спорт</div></a>			
+			</div>
+
+			<div>
+				<a href="/nauka/konferenciyi"><img src="/public/userfiles/image/conf_ek_2016_eng.jpg"></a>
+				<a style="z-index:200" href="/nauka/konferenciyi"><div class="mp_news_comment" style="text-align: center;"><br />Конференции</div></a>	
+			</div>
+			<div>
+				<a href="/nauka/vidavnicha_diyalnist/zhurnal_ek"><img src="http://ek-visnik.dp.ua/public/img/front/logo/all.png"></a>
+				<a style="z-index:200" href="/nauka/vidavnicha_diyalnist/zhurnal_ek"><div class="mp_news_comment" style="text-align: center;">Журнал<br />"Экономический весник"</div></a>	
+			</div>
+			<div>
+				<a href="/nauka/vidavnicha_diyalnist/zhurnal_vhhtv"><img src="http://vhht.dp.ua/public/img/front/logo/all.png"></a>
+				<a style="z-index:200" href="/nauka/vidavnicha_diyalnist/zhurnal_vhhtv"><div class="mp_news_comment" style="text-align: center;">Журнал<br />"Вопросы химии и химической технологии"</div></a>			
+			</div>
+		</div>	
+	</div>
+		<?php break;
+
+		
+		default:
+			# code...
+			break;
+	}
+	?>	
+
+<!--Openstat
+<span id="openstat2376283"></span>
+<script type="text/javascript">
+var openstat = { counter: 2376283, next: openstat };
+(function(d, t, p) {
+var j = d.createElement(t); j.async = true; j.type = "text/javascript";
+j.src = ("https:" == p ? "https:" : "http:") + "//openstat.net/cnt.js";
+var s = d.getElementsByTagName(t)[0]; s.parentNode.insertBefore(j, s);
+})(document, "script", document.location.protocol);
+</script>
+/Openstat-->
+
+<?php
+	}
+?>
